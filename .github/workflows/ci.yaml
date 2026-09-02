@@ -1,36 +1,31 @@
 name: CI Pipeline Spring Boot
-
 on:
   push:
     branches: [ main, develop ]
   pull_request:
     branches: [ main ]
-
 jobs:
   build:
+    strategy:
+      matrix:
+        java: [ '21', '24' ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Configurar JDK 21
+      - name: Configurar JDK ${{ matrix.java }}
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
+          java-version: ${{ matrix.java }}
           distribution: 'temurin'
 
-      - name: Build con Maven
-        run: mvn -B clean compile
-
-      - name: Ejecutar pruebas unitarias
-        run: mvn test
-
-      - name: Reporte de cobertura JaCoCo
-        run: mvn jacoco:report
+      - name: Build, test y verificar cobertura
+        run: mvn -B clean verify
 
       - name: Publicar reporte como artefacto
         uses: actions/upload-artifact@v4
         with:
-          name: reporte-jacoco
+          name: reporte-jacoco-java${{ matrix.java }}
           path: target/site/jacoco
 
       - name: Verificar variable de entorno
