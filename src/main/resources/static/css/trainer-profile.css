@@ -1,0 +1,214 @@
+:root {
+  --bg-body: #1f212c;
+  --primary-color: #2c5bff;
+  --fontSize-title: 40px;
+  --fontSize-paragraph: 20px;
+  --secondary-color: #1a73e8;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --danger-color: #ef4444;
+  --card-bg: #2a2d3a;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a3bd;
+}
+
+body {
+  background: var(--bg-body);
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-primary);
+}
+
+.main-container {
+  padding: 2rem;
+}
+
+.welcome-card {
+  background: linear-gradient(135deg,
+      var(--primary-color),
+      var(--secondary-color));
+  color: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(44, 91, 255, 0.3);
+  border: 1px solid rgba(44, 91, 255, 0.2);
+}
+
+.stats-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stats-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(44, 91, 255, 0.4);
+}
+
+.stat-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.stats-card h3 {
+  color: var(--text-primary);
+}
+
+.stats-card p {
+  color: var(--text-secondary);
+}
+
+.class-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border-left: 5px solid var(--primary-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 5px solid var(--primary-color);
+}
+
+.class-card:hover {
+  box-shadow: 0 8px 25px rgba(44, 91, 255, 0.3);
+}
+
+.class-card.active {
+  border-left-color: var(--success-color);
+  background: linear-gradient(to right,
+      rgba(16, 185, 129, 0.1),
+      var(--card-bg));
+}
+
+.class-card.upcoming {
+  border-left-color: var(--warning-color);
+}
+
+.class-card.completed {
+  border-left-color: #6b7280;
+  opacity: 0.8;
+}
+
+.class-card h5,
+.class-card h6 {
+  color: var(--text-primary);
+}
+
+.class-card .text-muted,
+.class-card small {
+  color: var(--text-secondary) !important;
+}
+
+.badge-custom {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.btn-action {
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.client-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,
+      var(--primary-color),
+      var(--secondary-color));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.time-badge {
+  background: rgba(44, 91, 255, 0.2);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 1px solid rgba(44, 91, 255, 0.3);
+}
+
+.section-card {
+  background: var(--card-bg);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-tabs {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  padding: 1rem 1.5rem;
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--primary-color);
+  background: rgba(44, 91, 255, 0.2);
+  border-radius: 10px;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--primary-color);
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card h6 {
+  color: var(--text-primary);
+}
+
+.card small,
+.card .text-muted {
+  color: var(--text-secondary) !important;
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--secondary-color);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de pagos</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/payment-history.css}">
+</head>
+
+<body>
+    <th:block th:insert="~{fragments/top-navbar}"></th:block>
+
+    <div class="history-container">
+        <div class="page-header">
+            <h1 class="page-title">Historial de pagos</h1>
+        </div>
+
+        <div th:if="${payments != null and !#lists.isEmpty(payments)}">
+            <h2 class="section-title">Items pagados</h2>
+
+            <div class="payments-list">
+                <div th:each="payment : ${payments}" class="payment-item">
+
+                    <div class="payment-left">
+                        <div class="payment-icon">
+                            <img th:if="${payment.franchise != null and payment.franchise.toLowerCase() == 'vs'}"
+                                src="/img/icons/visa.png" alt="VISA">
+                            <img th:if="${payment.franchise != null and payment.franchise.toLowerCase() == 'am'}"
+                                src="/img/icons/americanexpress.png" alt="American Express">
+                            <img th:if="${payment.franchise != null and payment.franchise.toLowerCase() == 'cr'}"
+                                src="/img/icons/mastercard.png" alt="Mastercard">
+                            <img th:if="${payment.franchise != null and payment.franchise.toLowerCase() == 'pse'}"
+                                src="/img/icons/pse.png" alt="PSE">
+                            <img th:if="${payment.franchise == null or payment.franchise.isEmpty()}"
+                                src="/img/icons/carddefault.png" alt="Método de pago">
+                        </div>
+
+                        <div class="payment-info">
+                            <h3 class="payment-plan-name" th:text="${payment.plan.planName}">Plan Premium</h3>
+                            <p class="payment-date" th:if="${payment.validUntil != null}">
+                                Vencimiento: <span
+                                    th:text="${#temporals.format(payment.validUntil, 'dd - MMM - yyyy')}">10 - AGO -
+                                    2025</span>
+                            </p>
+                            <p class="payment-period"
+                                th:if="${payment.validFrom != null and payment.validUntil != null}">
+                                Cobro por el uso de:
+                                <span th:text="${#temporals.format(payment.validFrom, 'dd/MM/yyyy')}">28/07/2025</span>
+                                hasta
+                                <span th:text="${#temporals.format(payment.validUntil, 'dd/MM/yyyy')}">27/08/2025</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="payment-right">
+                        <div class="payment-amount">
+                            <span class="amount-value"
+                                th:text="'$ ' + ${#numbers.formatDecimal(payment.amount, 0, 'POINT', 2, 'COMMA')}">
+                                $ 99.900,00
+                            </span>
+                        </div>
+
+                        <span class="payment-status" th:classappend="${payment.status == 'ACCEPTED'} ? 'status-accepted' : 
+                                             (${payment.status == 'PENDING'} ? 'status-pending' : 
+                                             (${payment.status == 'REJECTED'} ? 'status-rejected' : 
+                                             (${payment.status == 'EXPIRED'} ? 'status-expired' : 'status-failed')))"
+                            th:text="${payment.status == 'ACCEPTED'} ? 'Aceptado' : 
+                                       (${payment.status == 'PENDING'} ? 'Pendiente' : 
+                                       (${payment.status == 'REJECTED'} ? 'Rechazado' : 
+                                       (${payment.status == 'EXPIRED'} ? 'Expirado' : 'Fallido')))">
+                            Aceptado
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${payments == null or #lists.isEmpty(payments)}" class="empty-state">
+            <i class="bi bi-receipt"></i>
+            <p class="empty-state-title">No tienes pagos registrados</p>
+            <p class="empty-state-text">Cuando realices tu primera compra, aparecerá aquí</p>
+            <a th:href="@{/plan}" class="empty-state-btn">
+                Ver planes disponibles
+            </a>
+        </div>
+
+    </div>
+
+    <div th:replace="fragments/bottom-navbar :: bottom-navbar"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/active-gym-count.js}"></script>
+</body>
+
+</html>

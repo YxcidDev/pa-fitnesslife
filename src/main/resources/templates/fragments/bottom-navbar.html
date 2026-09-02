@@ -1,0 +1,25 @@
+<div th:fragment="bottom-navbar" class="bottom-navbar">
+    <a th:href="@{/home}" class="bottom-navbar__link">
+        <img th:src="@{/img/icons/icon-home.png}" alt="Inicio" class="icon-bottom-navbar" />
+    </a>
+
+    <a th:href="@{/user-profile}" class="bottom-navbar__link">
+        <img th:src="@{/img/icons/icon-user.png}" alt="Perfil" class="icon-bottom-navbar" />
+    </a>
+
+    <a th:href="@{/qr-code}" class="bottom-navbar__link">
+        <img th:src="@{/img/icons/icon-qrcode.png}" alt="Código QR" class="icon-bottom-navbar" />
+    </a>
+
+    <a th:href="@{/plan}" class="bottom-navbar__link">
+        <img th:src="@{/img/icons/icon-plan.png}" alt="Planes" class="icon-bottom-navbar" />
+    </a>
+
+    <a th:href="@{/payment-history}" class="bottom-navbar__link">
+        <img th:src="@{/img/icons/icon-wallet.png}" alt="Pagos" class="icon-bottom-navbar" />
+    </a>
+
+    <a sec:authorize="hasAnyRole('ADMIN','TRAINER')" th:href="@{/trainer-profile}" class="bottom-navbar__link">
+        <img th:src="@{/img/icons/BiCalendar3.png}" alt="Admin" class="icon-bottom-navbar" />
+    </a>
+</div>

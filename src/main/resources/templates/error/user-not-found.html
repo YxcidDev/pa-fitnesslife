@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Usuario No Encontrado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ffcc00;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #fffacd;
+        }
+
+        h1 {
+            color: #cc0000;
+        }
+
+        p.message {
+            font-size: 1.1em;
+            color: #333;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Error: Usuario No Encontrado</h1>
+
+        <p class="message" th:if="${error}" th:text="${error}">
+            Lo sentimos, el usuario que está intentando buscar no existe en nuestro sistema.
+        </p>
+
+        <p>
+            Verifique la información o regrese al
+            <a th:href="@{/login}">Inicio de Sesión</a> o a la
+            <a th:href="@{/register}">página de Registro</a>.
+        </p>
+
+        <small>Si cree que esto es un error, contacte al soporte técnico.</small>
+    </div>
+</body>
+
+</html>

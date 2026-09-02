@@ -1,0 +1,82 @@
+<nav th:fragment="sidebar" class="sidebar d-flex flex-column">
+
+    <div class="sidebar-header">
+        <div class="admin-profile">
+            <img th:if="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+                th:src="${currentUser.photoProfile}" alt="Admin Avatar" class="admin-avatar">
+            <img th:unless="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+                th:src="'https://ui-avatars.com/api/?name=' + ${currentUser.name} + '+' + ${currentUser.lastname} + '&background=eb6608&color=fff&size=128'"
+                alt="Admin Avatar" class="admin-avatar">
+            <div class="admin-info">
+                <h5 class="admin-name">
+                    <span th:text="${currentUser.name} + ' ' + ${currentUser.lastname}">Admin User</span>
+                </h5>
+                <p class="admin-role">Administrador</p>
+            </div>
+        </div>
+    </div>
+
+    <ul class="sidebar-menu">
+        <li class="menu-item">
+            <a href="/dashboard" class="menu-link" th:classappend="${currentPage == 'dashboard'} ? 'active'">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Panel</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/admin/churn" class="menu-link" th:classappend="${currentPage == 'churn'} ? 'active'">
+                <i class="bi bi-graph-down-arrow"></i>
+                <span>Usuarios en riesgo</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/admin/userTable" class="menu-link" th:classappend="${currentPage == 'usuarios'} ? 'active'">
+                <i class="bi bi-people-fill"></i>
+                <span>Usuarios</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/admin/functionalTraining" class="menu-link"
+                th:classappend="${currentPage == 'clases'} ? 'active'">
+                <i class="bi bi-calendar-event-fill"></i>
+                <span>Clases</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/admin/plans" class="menu-link">
+                <i class="bi bi-credit-card-fill"></i>
+                <span>Planes</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/admin/payments" class="menu-link">
+                <i class="bi bi-wallet-fill"></i>
+                <span>Pagos</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/admin/accesses" class="menu-link">
+                <i class="bi bi-door-closed-fill"></i>
+                <span>Accesos</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/attendance/kiosk" class="menu-link menu-link--kiosk" target="_blank" rel="noopener noreferrer"
+                title="Abre la pantalla de control de asistencias en una nueva pestaña">
+                <i class="bi bi-qr-code-scan"></i>
+                <span>Control de asistencias</span>
+                <i class="bi bi-box-arrow-up-right kiosk-external-icon"></i>
+            </a>
+        </li>
+    </ul>
+
+    <div class="sidebar-footer">
+        <a href="/home" class="footer-btn">
+            Ir a aplicación
+        </a>
+        <a th:href="@{/logout}" class="footer-btn logout">
+            Cerrar sesión
+        </a>
+    </div>
+
+</nav>

@@ -1,0 +1,83 @@
+.container-custom {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  overflow: hidden;
+}
+
+.header-section {
+  background: linear-gradient(90deg, #005f8f, #003b5e);
+  color: white;
+  padding: 40px;
+}
+
+.table-section {
+  padding: 30px 40px;
+}
+
+.table-custom thead th {
+  background: #f4f4f4;
+  color: #333;
+  padding: 15px;
+  text-transform: uppercase;
+  font-size: 12px;
+  border: none;
+}
+
+.table-custom tbody tr:hover {
+  background-color: #eef7ff;
+  transform: scale(1.01);
+  box-shadow: 0 4px 12px rgba(0, 125, 255, 0.15);
+}
+
+.benefit-list {
+  padding-left: 15px;
+  margin: 0;
+  font-size: 12px;
+  color: #444;
+}
+
+.badge-plan {
+  background: #e3f2fd;
+  color: #0d47a1;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.action-buttons .btn {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 8px;
+}
+
+.btn-edit {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.btn-edit:hover {
+  background: #e65100;
+  color: white;
+}
+
+.btn-delete {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.btn-delete:hover {
+  background: #c62828;
+  color: white;
+}
+
+.btn-add {
+  background: white;
+  color: #005f8f;
+  border: 2px solid white;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+}

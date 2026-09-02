@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de asistencias</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/attendance-kiosk.css}">
+</head>
+
+<body>
+
+    <div class="bg-layer">
+        <div class="bg-arrow bg-arrow--1"></div>
+        <div class="bg-arrow bg-arrow--2"></div>
+        <div class="bg-arrow bg-arrow--3"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <header class="kiosk-header">
+        <div class="header-brand">
+            <img th:src="@{/img/icons/logo-fl.png}" alt="Fitness Life" class="header-logo"
+                 onerror="this.style.display='none'">
+            <span class="header-title">Fitness Life</span>
+        </div>
+        <div class="header-clock">
+            <span id="currentTime" class="clock-time">--:--</span>
+            <span id="currentDate" class="clock-date">---</span>
+        </div>
+    </header>
+
+    <main class="kiosk-main">
+
+        <div id="stateIdle" class="state-panel state--idle state--active">
+            <div class="idle-icon">
+                <div class="idle-rings">
+                    <span class="ring ring--1"></span>
+                    <span class="ring ring--2"></span>
+                    <span class="ring ring--3"></span>
+                </div>
+                <i class="bi bi-qr-code-scan idle-qr-icon"></i>
+            </div>
+            <h2 class="idle-title">Esperando asistencia</h2>
+            <p class="idle-subtitle">Acerca tu código QR al lector</p>
+            <div class="idle-indicator">
+                <span class="indicator-dot"></span>
+                <span class="indicator-text">Sistema activo</span>
+            </div>
+        </div>
+
+        <div id="stateProcessing" class="state-panel state--processing">
+            <div class="processing-spinner">
+                <svg viewBox="0 0 60 60" class="spinner-svg">
+                    <circle cx="30" cy="30" r="26" class="spinner-track"/>
+                    <circle cx="30" cy="30" r="26" class="spinner-fill"/>
+                </svg>
+            </div>
+            <p class="processing-text">Verificando acceso...</p>
+        </div>
+
+        <div id="stateResult" class="state-panel state--result">
+            <div class="result-card" id="resultCard">
+
+                <div class="result-topbar" id="resultTopbar"></div>
+
+                <div class="result-body">
+
+                    <div class="result-avatar-wrap">
+                        <div class="result-avatar-ring" id="resultAvatarRing">
+                            <img id="resultPhoto" src="" alt="" class="result-photo">
+                            <div id="resultPhotoFallback" class="result-photo-fallback"></div>
+                        </div>
+                        <div class="result-status-badge" id="resultBadge">
+                            <i class="bi" id="resultBadgeIcon"></i>
+                        </div>
+                    </div>
+
+                    <div class="result-info">
+                        <p class="result-label">MIEMBRO</p>
+                        <h2 class="result-name" id="resultName">—</h2>
+                        <div class="result-plan-wrap">
+                            <span class="result-plan-label">PLAN:</span>
+                            <span class="result-plan-value" id="resultPlan">—</span>
+                        </div>
+                        <div class="result-status-bar" id="resultStatusBar">
+                            <span class="result-status-text" id="resultStatusText">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-footer">
+                    <span class="result-footer-id" id="resultFooterId"></span>
+                    <span class="result-footer-time" id="resultFooterTime"></span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <input
+        id="qrInput"
+        type="text"
+        autocomplete="off"
+        aria-hidden="true"
+        tabindex="-1"
+        style="position:fixed;opacity:0;pointer-events:none;width:0;height:0;"
+    >
+
+    <div class="countdown-bar" id="countdownBar">
+        <div class="countdown-fill" id="countdownFill"></div>
+    </div>
+
+    <div class="kiosk-toast" id="kioskToast"></div>
+
+    <script th:src="@{/js/attendance-kiosk.js}"></script>
+</body>
+</html>

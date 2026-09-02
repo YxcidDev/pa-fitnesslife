@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Error | Sistema</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Work+Sans:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #1d1b1a;
+            --text-primary: #ffffff;
+            --text-secondary: #b5b5b5;
+            --accent: #eb6608;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            font-family: 'Work Sans', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .error-wrapper {
+            max-width: 520px;
+            width: 100%;
+        }
+
+        .error-code {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .error-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 1rem;
+            line-height: 1.2;
+        }
+
+        .error-message {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2.5rem;
+        }
+
+        .error-message span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .error-actions a {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            color: #ffffff;
+            background: var(--accent);
+            padding: 12px 28px;
+            border-radius: 4px;
+            transition: background 0.25s ease, transform 0.25s ease;
+        }
+
+        .error-actions a:hover {
+            background: #c75006;
+        }
+
+        .error-footer {
+            margin-top: 3rem;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 480px) {
+            .error-title {
+                font-size: 26px;
+            }
+
+            .error-message {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="error-wrapper">
+
+        <div class="error-code" th:text="${status} != null ? 'ERROR ' + ${status} : 'ERROR DEL SISTEMA'">
+            ERROR 500
+        </div>
+
+        <h1 class="error-title" th:text="${title} ?: 'Algo salió mal'">
+            Algo salió mal
+        </h1>
+
+        <p class="error-message">
+            <span th:if="${error}" th:text="${error}">
+                Ocurrió un error inesperado al procesar tu solicitud.
+            </span>
+            <span th:unless="${error}">
+                Ocurrió un error inesperado al procesar tu solicitud.
+            </span>
+            Por favor, inténtalo nuevamente o vuelve al inicio.
+        </p>
+
+        <div class="error-actions">
+            <a th:href="@{/}">Volver al inicio</a>
+        </div>
+
+        <div class="error-footer">
+            Si el problema persiste, contacta al administrador del sistema.
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,370 @@
+:root {
+    --bg-body: #1f212c;
+    --primary-color: #2c5bff;
+    --card-bg: #292c36;
+    --text-white: #ffffff;
+    --error-color: #ff4757;
+    --success-color: #84d65a;
+}
+
+body {
+    background: var(--bg-body);
+    min-height: 100vh;
+    color: var(--text-white);
+}
+
+.payment-container {
+    padding: 2rem 1.5rem 8rem 1.5rem;
+    min-height: calc(100vh - 80px);
+}
+
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-divider {
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, transparent 100%);
+    border: none;
+    margin: 0 0 2rem 0;
+}
+
+.payment-card {
+    background: linear-gradient(135deg, var(--card-bg) 0%, #1f212c 100%);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(44, 91, 255, 0.2);
+}
+
+.plan-summary {
+    background: rgba(44, 91, 255, 0.1);
+    border: 1px solid rgba(44, 91, 255, 0.3);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.plan-summary-title {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.plan-summary-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin: 0 0 1rem 0;
+}
+
+.plan-summary-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.plan-summary-currency {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-left: 4px;
+}
+
+.payment-form {
+    margin-top: 2rem;
+}
+
+.form-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-white);
+    margin: 0 0 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-section-title i {
+    color: var(--primary-color);
+    font-size: 18px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.form-label-required {
+    color: var(--error-color);
+    margin-left: 4px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text-white);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(44, 91, 255, 0.1);
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 18px;
+    pointer-events: none;
+}
+
+.form-input.with-icon {
+    padding-right: 3rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-error {
+    display: none;
+    font-size: 13px;
+    color: var(--error-color);
+    margin-top: 0.5rem;
+    padding-left: 0.25rem;
+}
+
+.form-group.error .form-error {
+    display: block;
+}
+
+.form-group.error .form-input {
+    border-color: var(--error-color);
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.form-group.success .form-input {
+    border-color: var(--success-color);
+}
+
+.security-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.75rem 1rem;
+    background: rgba(132, 214, 90, 0.1);
+    border: 1px solid rgba(132, 214, 90, 0.3);
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    font-size: 13px;
+    color: var(--success-color);
+}
+
+.security-badge i {
+    font-size: 18px;
+}
+
+.submit-btn {
+    background: var(--primary-color);
+    color: var(--text-white);
+    border: none;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-weight: 700;
+    font-size: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+}
+
+.submit-btn:hover {
+    background: #1e4ad9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(44, 91, 255, 0.4);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+.submit-btn i {
+    font-size: 20px;
+}
+
+.submit-btn:disabled {
+    background: rgba(44, 91, 255, 0.3);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.cancel-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 15px;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+.cancel-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--text-white);
+}
+
+.info-text {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+
+.info-text i {
+    color: var(--primary-color);
+    margin-right: 4px;
+}
+
+.card-brands {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-brand-icon {
+    width: 40px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.card-brand-icon:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .payment-container {
+        padding: 1.5rem 1rem 6rem 1rem;
+    }
+
+    .page-title {
+        font-size: 24px;
+    }
+
+    .payment-card {
+        padding: 1.5rem;
+    }
+
+    .plan-summary-name {
+        font-size: 20px;
+    }
+
+    .plan-summary-price {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 530px) {
+    .payment-container {
+        padding: 1rem 0.75rem 6rem 0.75rem;
+    }
+
+    .page-title {
+        font-size: 22px;
+    }
+
+    .payment-card {
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+
+    .plan-summary {
+        padding: 1.25rem;
+    }
+
+    .plan-summary-name {
+        font-size: 18px;
+    }
+
+    .plan-summary-price {
+        font-size: 24px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-btn {
+        padding: 0.875rem 1.25rem;
+        font-size: 15px;
+    }
+}

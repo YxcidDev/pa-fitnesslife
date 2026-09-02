@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-dashboard.css}">
+</head>
+
+<body>
+    <th:block th:insert="~{fragments/navdashboard :: sidebar}"></th:block>
+
+    <div class="main-content">
+        <div class="dashboard-analytics">
+
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Dashboard Analytics</h1>
+                    <p class="dashboard-subtitle">Bienvenido al panel de control</p>
+                </div>
+                <button class="btn-download" onclick="downloadReport()">
+                    Descargar reportes
+                </button>
+            </div>
+
+            <div class="metrics-grid">
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <div class="metric-trend positive" id="activeUsers-trend">
+                            <i class="bi bi-arrow-up-short" id="activeUsers-trend-icon"></i>
+                            <span>+0%</span>
+                        </div>
+                    </div>
+                    <div class="metric-body">
+                        <p class="metric-label">Usuarios activos</p>
+                        <h2 class="metric-value" id="activeUsers-value">0</h2>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="bi bi-door-open-fill"></i>
+                        </div>
+                        <div class="metric-trend positive" id="accessesToday-trend">
+                            <i class="bi bi-arrow-up-short" id="accessesToday-trend-icon"></i>
+                            <span>+0%</span>
+                        </div>
+                    </div>
+                    <div class="metric-body">
+                        <p class="metric-label">Accesos hoy</p>
+                        <h2 class="metric-value" id="accessesToday-value">0</h2>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                        <div class="metric-trend positive" id="revenueThisMonth-trend">
+                            <i class="bi bi-arrow-up-short" id="revenueThisMonth-trend-icon"></i>
+                            <span>+0%</span>
+                        </div>
+                    </div>
+                    <div class="metric-body">
+                        <p class="metric-label">Ingresos del mes</p>
+                        <h2 class="metric-value" id="revenueThisMonth-value">$0</h2>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon">
+                            <i class="bi bi-credit-card-fill"></i>
+                        </div>
+                        <div class="metric-trend positive" id="activePlans-trend">
+                            <i class="bi bi-arrow-up-short" id="activePlans-trend-icon"></i>
+                            <span>+0%</span>
+                        </div>
+                    </div>
+                    <div class="metric-body">
+                        <p class="metric-label">Planes activos</p>
+                        <h2 class="metric-value" id="activePlans-value">0</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-section">
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Ingresos mensuales
+                        </h3>
+                        <i class="bi bi-three-dots-vertical card-action"></i>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Transacciones recientes
+                        </h3>
+                        <i class="bi bi-three-dots-vertical card-action"></i>
+                    </div>
+                    <div class="transactions-list" id="transactions-list">
+                        <div class="chart-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Cargando transacciones...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Planes más vendidos
+                        </h3>
+                        <i class="bi bi-three-dots-vertical card-action"></i>
+                    </div>
+                    <div class="small-chart-container">
+                        <canvas id="planSalesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Accesos por día
+                        </h3>
+                        <i class="bi bi-three-dots-vertical card-action"></i>
+                    </div>
+                    <div class="small-chart-container">
+                        <canvas id="accessByDayChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Distribución por género
+                        </h3>
+                        <i class="bi bi-three-dots-vertical card-action"></i>
+                    </div>
+                    <div class="small-chart-container">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Clases populares
+                        </h3>
+                        <i class="bi bi-three-dots-vertical card-action"></i>
+                    </div>
+                    <div class="transactions-list" id="popular-classes-list" style="max-height: 230px;">
+                        <div class="chart-loading">
+                            <div class="loading-spinner"></div>
+                            <p>Cargando clases...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="expiring-plans-section">
+                <div class="main-section">
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Planes por vencer (próximos 7 días)
+                            </h3>
+                            <i class="bi bi-three-dots-vertical card-action"></i>
+                        </div>
+                        <div class="expiring-list" id="expiring-plans-list">
+                            <div class="chart-loading">
+                                <div class="loading-spinner"></div>
+                                <p>Cargando planes...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                Horas pico de acceso
+                            </h3>
+                            <i class="bi bi-three-dots-vertical card-action"></i>
+                        </div>
+                        <div class="chart-container" style="height: 380px;">
+                            <canvas id="peakHoursHeatmap"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+            <script
+                src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@2.0.1/dist/chartjs-chart-matrix.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="/js/dashboard.js"></script>
+</body>
+
+</html>

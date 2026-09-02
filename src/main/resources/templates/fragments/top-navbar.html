@@ -1,0 +1,140 @@
+<nav th:fragment="top-navbar" class="top-navbar">
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <img th:if="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+          th:src="${currentUser.photoProfile}" alt="User Avatar" class="user-avatar">
+        <img
+          th:unless="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+          th:src="'https://ui-avatars.com/api/?name=' + ${currentUser.name} + '+' + ${currentUser.lastname} + '&background=eb6608&color=fff&size=128'"
+          alt="User Avatar" class="user-avatar">
+        <div>
+          <p class="user-name">
+            Hola, <strong th:text="${currentUser.name}"></strong> <strong th:text="${currentUser.lastname}"></strong>
+          </p>
+        </div>
+      </div>
+
+      <button class="menu-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral">
+        <i class="bi bi-three-dots-vertical"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="menuLateral">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menú</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body d-flex flex-column">
+    <div class="profile-section">
+      <div class="position-relative d-inline-block">
+        <img th:if="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+          th:src="${currentUser.photoProfile}" alt="Profile Avatar" class="profile-avatar-large">
+        <img
+          th:unless="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+          th:src="'https://ui-avatars.com/api/?name=' + ${currentUser.name} + '+' + ${currentUser.lastname} + '&background=eb6608&color=fff&size=256'"
+          alt="Profile Avatar" class="profile-avatar-large">
+        <button class="edit-profile-btn" data-bs-toggle="modal" data-bs-target="#photoModal">
+          <i class="bi bi-plus text-white"></i>
+        </button>
+      </div>
+      <h5 class="mt-2 mb-0">
+        <span th:text="${currentUser.name} + ' ' + ${currentUser.lastname}">Usuario Demo</span>
+      </h5>
+    </div>
+
+    <div class="online-badge">
+      <i class="bi bi-people-fill"></i>
+      <span>Gimnasio ahora</span>
+      <span class="online-count" id="onlineCount">—</span>
+    </div>
+
+    <ul class="menu-list">
+      <li>
+        <a href="/home">
+          <i class="bi bi-house-fill"></i>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="/user-profile">
+          <i class="bi bi-person-fill"></i>
+          Pérfil
+        </a>
+      </li>
+      <li>
+        <a href="/qr-code">
+          <i class="bi bi-qr-code"></i>
+          Código QR
+        </a>
+      </li>
+      <li>
+        <a href="/plan">
+          <i class="bi bi-credit-card-fill"></i>
+          Planes
+        </a>
+      </li>
+      <li>
+        <a href="/payment-history">
+          <i class="bi bi-wallet-fill"></i>
+          Historial de pago
+        </a>
+      </li>
+    </ul>
+
+    <div class="logout-section">
+      <ul class="menu-list">
+        <li>
+          <a href="/logout" class="logout-btn">
+            <i class="bi bi-door-open-fill"></i>
+            Cerrar sesión
+          </a>
+        </li>
+      </ul>
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+          <i class="bi bi-instagram"></i>
+        </a>
+        <a href="https://tiktok.com" target="_blank" aria-label="TikTok">
+          <i class="bi bi-tiktok"></i>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="photoModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content photo-modal">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">Cambiar foto de pérfil</h5>
+        <button type="button" class="btn-close modal-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img th:if="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+          th:src="${currentUser.photoProfile}" alt="Current Photo" class="profile-photo mb-3">
+        <img
+          th:unless="${currentUser != null and currentUser.photoProfile != null and !currentUser.photoProfile.isEmpty()}"
+          th:src="'https://ui-avatars.com/api/?name=' + ${currentUser.name} + '+' + ${currentUser.lastname} + '&background=eb6608&color=fff&size=256'"
+          alt="Current Photo" class="profile-photo mb-3">
+
+        <form th:action="@{/update-profile-picture}" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="photoInput" class="form-label">Seleccionar nueva foto</label>
+            <input type="file" name="profileImage" class="form-control" id="photoInput" accept="image/*" required>
+          </div>
+          <button type="submit" class="btn w-100 btn-upload">
+            Subir foto
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios en riesgo</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-table.css}">
+    <link rel="stylesheet" th:href="@{/css/churn.css}">
+</head>
+<body>
+    <th:block th:insert="~{fragments/navdashboard :: sidebar}"></th:block>
+
+    <div class="main-content">
+        <div class="container-fluid p-4">
+
+            <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-3">
+                <h1 class="page-title mb-0">
+                    Usuarios en riesgo
+                </h1>
+                <button class="btn btn-action px-4" id="btnPredict" onclick="triggerRecalculate()">
+                    <i class="bi bi-cpu me-2"           th:if="${!hasData}"></i>
+                    <i class="bi bi-arrow-clockwise me-2" th:if="${hasData}"></i>
+                    <span th:text="${hasData} ? 'Actualizar predicción' : 'Realizar predicción'">Realizar predicción</span>
+                </button>
+            </div>
+
+            <div th:if="${!hasData}" class="table-container">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-cpu fs-1 d-block mb-3" style="color: var(--primary-color);"></i>
+                    <h5 style="color: var(--text-white);">Sin predicciones disponibles</h5>
+                    <p style="color: var(--text-gray);" class="mb-4">
+                        Haz clic en <strong style="color: var(--primary-color);">Realizar predicción</strong>
+                        para analizar el comportamiento de los usuarios con el modelo J48.
+                    </p>
+                    <button class="btn btn-action px-5" onclick="triggerRecalculate()">
+                        <i class="bi bi-cpu me-2"></i> Realizar predicción
+                    </button>
+                </div>
+            </div>
+
+            <div th:if="${hasData}">
+
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="churn-stat-card churn-stat-card--high">
+                            <div class="churn-stat-body">
+                                <span class="churn-stat-value" th:text="${highCount}">0</span>
+                                <span class="churn-stat-label">Riesgo alto</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="churn-stat-card churn-stat-card--medium">
+                            <div class="churn-stat-body">
+                                <span class="churn-stat-value" th:text="${mediumCount}">0</span>
+                                <span class="churn-stat-label">Riesgo medio</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="churn-stat-card churn-stat-card--low">
+                            <div class="churn-stat-body">
+                                <span class="churn-stat-value" th:text="${lowCount}">0</span>
+                                <span class="churn-stat-label">Riesgo bajo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-xl-3">
+                        <div class="churn-stat-card churn-stat-card--pct">
+                            <div class="churn-stat-body">
+                                <span class="churn-stat-value" th:text="${churnPct} + '%'">0%</span>
+                                <span class="churn-stat-label">Churn estimado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-muted small mb-3" th:if="${lastCalculated != null}">
+                    <i class="bi bi-clock me-1"></i>
+                    Última predicción: <span th:text="${#temporals.format(lastCalculated, 'dd/MM/yyyy HH:mm')}"></span>
+                </p>
+
+                <div class="table-container">
+                    <div class="card-body">
+
+                        <div class="d-flex align-items-center mb-4 flex-wrap gap-3">
+                            <form method="get" action="/admin/churn"
+                                  class="d-flex gap-2 flex-wrap align-items-center w-100">
+                                <div class="position-relative search-input-wrapper">
+                                    <input type="text" name="search" class="form-control search-input"
+                                           placeholder="Buscar usuario..." th:value="${searchTerm}">
+                                </div>
+                                <select name="risk" class="form-select filter-select">
+                                    <option value="">Todos los niveles</option>
+                                    <option value="HIGH"   th:selected="${riskFilter == 'HIGH'}">Riesgo alto</option>
+                                    <option value="MEDIUM" th:selected="${riskFilter == 'MEDIUM'}">Riesgo medio</option>
+                                    <option value="LOW"    th:selected="${riskFilter == 'LOW'}">Riesgo bajo</option>
+                                </select>
+                                <select name="profile" class="form-select filter-select">
+                                    <option value="">Todos los perfiles</option>
+                                    <option value="comprometido" th:selected="${profileFilter == 'comprometido'}">Comprometido</option>
+                                    <option value="irregular"    th:selected="${profileFilter == 'irregular'}">Irregular</option>
+                                    <option value="desmotivado"  th:selected="${profileFilter == 'desmotivado'}">Desmotivado</option>
+                                </select>
+                                <button type="submit" class="btn btn-filter">Filtrar</button>
+                                <a th:href="@{/admin/churn}" class="btn btn-clear">Limpiar</a>
+                            </form>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-users align-middle" id="churnTable">
+                                <thead>
+                                    <tr>
+                                        <th>Usuario</th>
+                                        <th>Plan</th>
+                                        <th>Perfil</th>
+                                        <th>Últ. asistencia</th>
+                                        <th>Visitas</th>
+                                        <th>Min/sesión</th>
+                                        <th>Pagos</th>
+                                        <th>Clases</th>
+                                        <th>Riesgo</th>
+                                        <th>Predicción</th>
+                                        <th>Confianza</th>
+                                        <th class="text-center">Detalle</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="churnTableBody">
+                                    <tr th:each="result : ${churnResults}"
+                                        th:attr="data-risk=${result.riskLevel},
+                                                 data-name=${result.name},
+                                                 data-profile=${result.profile}">
+
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img th:src="'https://ui-avatars.com/api/?name='
+                                                             + ${result.name}
+                                                             + '&background=eb6608&color=fff&size=128'"
+                                                     alt="Avatar" class="user-avatar">
+                                                <div>
+                                                    <p class="mb-0 fw-bold user-name" th:text="${result.name}"></p>
+                                                    <small class="text-muted" th:text="${result.email}"></small>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <span class="churn-plan-badge"
+                                                  th:classappend="${result.planLevel == 3} ? ' churn-plan-elite' :
+                                                                  (${result.planLevel == 2} ? ' churn-plan-premium' : ' churn-plan-basic')"
+                                                  th:text="${result.plan}"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class="churn-profile-badge"
+                                                  th:classappend="${result.profile == 'comprometido'} ? ' churn-profile-committed' :
+                                                                  (${result.profile == 'desmotivado'} ? ' churn-profile-unmotivated' : ' churn-profile-irregular')">
+                                                <span th:if="${result.profile == 'comprometido'}">Comprometido</span>
+                                                <span th:if="${result.profile == 'irregular'}">Irregular</span>
+                                                <span th:if="${result.profile == 'desmotivado'}">Desmotivado</span>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <span th:if="${result.daysSinceLastAtt < 90}"
+                                                  th:classappend="${result.daysSinceLastAtt > 30} ? 'text-danger' : ''"
+                                                  th:text="${result.daysSinceLastAtt} + ' días'"></span>
+                                            <span th:if="${result.daysSinceLastAtt >= 90}" class="text-danger">Sin registro</span>
+                                        </td>
+
+                                        <td th:text="${result.nAttendances}"></td>
+
+                                        <td>
+                                            <span th:if="${result.avgSessionMinutes > 0}"
+                                                  th:text="${#numbers.formatDecimal(result.avgSessionMinutes, 1, 0)} + ' min'"></span>
+                                            <span th:if="${result.avgSessionMinutes == 0}" class="text-muted">—</span>
+                                        </td>
+
+                                        <td th:text="${result.nPayments}"></td>
+
+                                        <td class="text-center">
+                                            <i th:if="${result.participatesInClasses}"
+                                               class="bi bi-check-circle-fill" style="color:#2ecc71;font-size:1.1rem;"
+                                               title="Participa en clases funcionales"></i>
+                                            <i th:unless="${result.participatesInClasses}"
+                                               class="bi bi-x-circle-fill" style="color:#6c757d;font-size:1.1rem;"
+                                               title="No participa en clases funcionales"></i>
+                                        </td>
+
+                                        <td>
+                                            <span class="churn-risk-badge"
+                                                  th:classappend="${result.riskLevel == 'HIGH'} ? ' churn-risk-high' :
+                                                                  (${result.riskLevel == 'MEDIUM'} ? ' churn-risk-medium' : ' churn-risk-low')">
+                                                <span th:if="${result.riskLevel == 'HIGH'}">Alto</span>
+                                                <span th:if="${result.riskLevel == 'MEDIUM'}">Medio</span>
+                                                <span th:if="${result.riskLevel == 'LOW'}">Bajo</span>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <span th:class="${result.prediction == 'Yes'} ? 'churn-prediction-yes' : 'churn-prediction-no'"
+                                                  th:text="${result.prediction == 'Yes'} ? 'Deserción' : 'Retención'"></span>
+                                        </td>
+
+                                        <td>
+                                            <span class="churn-confidence-badge"
+                                                  th:text="${#numbers.formatDecimal(result.predictionConfidence, 1, 0)} + '%'"></span>
+                                        </td>
+
+                                        <td class="text-center">
+                                            <button class="btn btn-action btn-churn-detail"
+                                                    title="Ver detalle"
+                                                    th:attr="
+                                                        data-userid=${result.userId},
+                                                        data-name=${result.name},
+                                                        data-plan=${result.plan},
+                                                        data-plan-level=${result.planLevel},
+                                                        data-profile=${result.profile},
+                                                        data-risk=${result.riskLevel},
+                                                        data-prediction=${result.prediction},
+                                                        data-confidence=${result.predictionConfidence},
+                                                        data-days-att=${result.daysSinceLastAtt},
+                                                        data-attendances=${result.nAttendances},
+                                                        data-avg-min=${result.avgSessionMinutes},
+                                                        data-n-payments=${result.nPayments},
+                                                        data-days-payment=${result.daysSinceLastPayment},
+                                                        data-participates=${result.participatesInClasses},
+                                                        data-email=${result.email},
+                                                        data-phone=${result.phone},
+                                                        data-reasons=${result.reasons},
+                                                        data-recommendations=${result.recommendations}">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+
+                                    <tr th:if="${#lists.isEmpty(churnResults)}">
+                                        <td colspan="12" class="text-center py-5" style="color: var(--text-gray);">
+                                            <i class="bi bi-search fs-2 d-block mb-2" style="color: var(--primary-color);"></i>
+                                            No se encontraron usuarios con los filtros aplicados
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-3">
+                            <div class="pagination-info">
+                                Mostrando <strong th:text="${churnResults.size()}"></strong>
+                                de <strong th:text="${totalItems}"></strong> usuarios analizados
+                            </div>
+
+                            <nav th:if="${totalPages > 1}">
+                                <ul class="pagination mb-0">
+                                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{/admin/churn(page=0, risk=${riskFilter}, profile=${profileFilter}, search=${searchTerm})}">
+                                            <i class="bi bi-chevron-double-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{/admin/churn(page=${currentPage - 1}, risk=${riskFilter}, profile=${profileFilter}, search=${searchTerm})}">
+                                            <i class="bi bi-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item"
+                                        th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                                        th:if="${i >= currentPage - 2 && i <= currentPage + 2}"
+                                        th:classappend="${i == currentPage} ? 'active'">
+                                        <a class="page-link"
+                                           th:href="@{/admin/churn(page=${i}, risk=${riskFilter}, profile=${profileFilter}, search=${searchTerm})}"
+                                           th:text="${i + 1}">1</a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{/admin/churn(page=${currentPage + 1}, risk=${riskFilter}, profile=${profileFilter}, search=${searchTerm})}">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                    <li class="page-item" th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+                                        <a class="page-link"
+                                           th:href="@{/admin/churn(page=${totalPages - 1}, risk=${riskFilter}, profile=${profileFilter}, search=${searchTerm})}">
+                                            <i class="bi bi-chevron-double-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="churnDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content modal-bodytec">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <span id="modalUserName">Detalle del usuario</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <img id="modalAvatar" src="" alt="Avatar" class="user-avatar"
+                             style="width:56px;height:56px;">
+                        <div class="flex-grow-1">
+                            <h5 id="modalNameDetail" class="mb-0" style="color:var(--text-white);"></h5>
+                            <small id="modalEmail" style="color:var(--text-gray);"></small>
+                        </div>
+                        <span id="modalRiskBadge" class="churn-risk-badge fs-6"></span>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Plan</span>
+                                <span id="modalPlan" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Perfil</span>
+                                <span id="modalProfile" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Días sin asistir</span>
+                                <span id="modalDaysAtt" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Total visitas</span>
+                                <span id="modalAttendances" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Min. prom./sesión</span>
+                                <span id="modalAvgMin" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Pagos realizados</span>
+                                <span id="modalNPayments" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Días membresía vencida</span>
+                                <span id="modalDaysPayment" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="churn-metric-card">
+                                <span class="churn-metric-label">Clases grupales</span>
+                                <span id="modalParticipates" class="churn-metric-value"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="churn-prediction-block mb-4">
+                        <p class="churn-section-title">Predicción del modelo J48</p>
+
+                        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                            <div>
+                                <p class="mb-1" style="color: var(--text-gray); font-size: 0.82rem;">
+                                    El modelo predictivo indica:
+                                </p>
+                                <strong id="modalPrediction" style="font-size: 1.05rem;"></strong>
+                            </div>
+
+                            <div class="churn-confidence-block">
+                                <span class="churn-confidence-label">Confianza de predicción</span>
+                                <span id="modalConfidence" class="churn-confidence-value">—</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="churn-confidence-bar-track">
+                                <div id="modalConfidenceBar" class="churn-confidence-bar-fill" style="width: 0%;"></div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-1">
+                                <small style="color: var(--text-gray); font-size: 0.72rem;">0%</small>
+                                <small style="color: var(--text-gray); font-size: 0.72rem;">100%</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <p class="churn-section-title">¿Por qué está en riesgo?</p>
+                        <ul id="modalReasons" class="churn-reasons-list"></ul>
+                    </div>
+
+                    <div class="mb-2">
+                        <p class="churn-section-title">Acciones recomendadas</p>
+                        <ul id="modalRecommendations" class="churn-recs-list"></ul>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer flex-wrap gap-2">
+                    <button type="button" class="btn btn-secondary-modal"
+                            data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-action btn-churn-action"
+                            onclick="contactUser()">Contactar usuario</button>
+                    <button type="button" class="btn btn-action btn-churn-action"
+                            onclick="sendPromotion()">Enviar promoción</button>
+                    <button type="button" class="btn btn-action btn-churn-action"
+                            onclick="registerFollowUp()">Registrar seguimiento</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999;">
+        <div id="churnToast" class="toast align-items-center text-white border-0"
+             style="background: var(--primary-color);" role="alert">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMsg">Acción registrada.</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/churn.js}"></script>
+</body>
+</html>

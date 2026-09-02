@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+    --bg-body: #1d1b1a;
+    --primary-color: #eb6608;
+    --card-bg: #323333;
+    --text-white: #ffffff;
+    --text-gray: #d3d3d3;
+    --hover-primary: #c75006;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+p,
+a,
+li,
+td,
+input,
+label,
+select,
+span {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.sidebar {
+    background: var(--card-bg);
+    color: var(--text-white);
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 0;
+    overflow-y: auto;
+    transition: .3s;
+    z-index: 1000;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+.sidebar-header {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.admin-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    border: 2px solid var(--primary-color);
+    object-fit: cover;
+}
+
+.admin-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.admin-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin: 0;
+    text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.admin-role {
+    font-size: 13px;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 1.5rem 1rem;
+    margin: 0;
+    flex: 1;
+}
+
+.menu-item {
+    margin-bottom: 0.5rem;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: .3s;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.menu-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-white);
+}
+
+.menu-link.active {
+    background: var(--primary-color);
+    color: var(--text-white);
+}
+
+.menu-link i {
+    font-size: 1.2rem;
+}
+
+.sidebar-footer {
+    padding: 1.5rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.footer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: .3s;
+    background: var(--primary-color);
+    color: var(--text-white);
+}
+
+.footer-btn:hover {
+    background: var(--hover-primary);
+    color: var(--text-white);
+}
+
+.footer-btn.logout {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-white);
+    margin: 0 0.2rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.footer-btn.logout:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--text-white);
+}
+
+.footer-btn i {
+    font-size: 18px;
+}
+
+.main-content {
+    margin-left: 260px;
+    min-height: 100vh;
+    background: var(--bg-body);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        top: auto;
+        flex-direction: row;
+        padding: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .sidebar-header,
+    .sidebar-footer {
+        display: none;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 0.5rem;
+        margin: 0;
+    }
+
+    .menu-item {
+        margin: 0;
+    }
+
+    .menu-link {
+        flex-direction: column;
+        padding: 8px 12px;
+        gap: 4px;
+        font-size: 11px;
+    }
+
+    .menu-link i {
+        font-size: 1.3rem;
+    }
+
+    .menu-link span {
+        font-size: 10px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-bottom: 70px;
+    }
+}

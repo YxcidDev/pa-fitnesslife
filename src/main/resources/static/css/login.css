@@ -1,0 +1,493 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --bg-body: #1d1b1a;
+    --primary-color: #eb6608;
+    --fontSize-title: 40px;
+    --fontSize-paragraph: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+p,
+a,
+li,
+td,
+input,
+label,
+select {
+    font-family: 'Work Sans', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-body) !important;
+}
+
+main {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    max-width: 1020px;
+    height: 640px;
+    background: #323333;
+    border-radius: 4px;
+    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
+}
+
+.inner-box {
+    position: absolute;
+    width: calc(100% - 4.1rem);
+    height: calc(100% - 4.1rem);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.forms-wrap {
+    position: absolute;
+    height: 100%;
+    width: 45%;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    transition: .8s ease-in-out;
+}
+
+form {
+    max-width: 260px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    transition: opacity 0.02s 0.4s;
+}
+
+form.sign-up-form {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 150px;
+    margin-right: 0.3rem;
+}
+
+.heading h2 {
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: #ffff;
+}
+
+.heading h6 {
+    color: #d3d3d3;
+    font-weight: 400;
+    font-size: 0.75rem;
+    display: inline;
+}
+
+.toggle {
+    color: #ffff;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.toggle:hover {
+    color: var(--primary-color);
+}
+
+.input-wrap {
+    position: relative;
+    height: 37px;
+    margin-bottom: 2.5rem;
+}
+
+.input-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    height: 37px;
+}
+
+.input-wrap.half {
+    flex: 1;
+    position: relative;
+    height: 100%;
+}
+
+.input-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #d3d3d3;
+    padding: 0;
+    font-size: .95rem;
+    color: #ffff;
+    transition: 0.4s;
+}
+
+.input-wrap label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: .95rem;
+    color: #d3d3d3;
+    pointer-events: none;
+    transition: 0.4s;
+}
+
+.input-field.active {
+    border-bottom-color: #ffff;
+}
+
+.input-field.active+label {
+    font-size: .75rem;
+    top: -2px;
+}
+
+.sign-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 14px 26px;
+    background: var(--primary-color);
+    color: #ffff;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 2rem;
+    transition: 0.3s;
+}
+
+.sign-btn:hover {
+    background: #c75006;
+}
+
+.text {
+    color: #d3d3d3;
+    font-size: .7rem;
+}
+
+.text a {
+    color: #ffff;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.text a:hover {
+    color: var(--primary-color);
+}
+
+main.sign-up-mode form.sign-in-form {
+    opacity: 0;
+    pointer-events: none;
+}
+
+main.sign-up-mode form.sign-up-form {
+    opacity: 1;
+    pointer-events: all;
+}
+
+main.sign-up-mode .forms-wrap {
+    left: 55%;
+}
+
+main.sign-up-mode .carousel {
+    left: 0%;
+}
+
+.carousel {
+    position: absolute;
+    height: 100%;
+    width: 55%;
+    left: 45%;
+    top: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: .8s ease-in-out;
+}
+
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.image.show {
+    opacity: 1;
+}
+
+.bullets {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.bullets span {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 0.25rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bullets span.active {
+    width: 1.1rem;
+    background-color: #ffff;
+    border-radius: 1rem;
+}
+
+.form__group-correct {
+    border-bottom: 2px solid #28a745 !important;
+}
+
+.form__group-incorrect {
+    border-bottom: 2px solid #dc3545 !important;
+}
+
+.form__input-error {
+    font-size: 0.65rem;
+    color: #dc3545;
+    margin-top: 0.15rem;
+    display: none;
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+    width: 100%;
+    line-height: 1.1;
+}
+
+.form__input-error-active {
+    display: block;
+}
+
+.form__message-success {
+    font-size: 0.875rem;
+    color: #28a745;
+    display: none;
+    margin-top: 1rem;
+}
+
+.form__message-success-active {
+    display: block;
+}
+
+.form-control::placeholder {
+    color: #d3d3d3 !important;
+    opacity: 1 !important;
+}
+
+main .mt-5 {
+    margin-top: 0 !important;
+}
+
+main .text {
+    margin-top: -16px;
+}
+
+#modalPasswordReset .modal-content {
+    background: #323333;
+    border: 1px solid #444;
+    border-radius: 8px;
+}
+
+#modalPasswordReset .modal-title {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#modalPasswordReset .text-muted-custom {
+    color: #d3d3d3;
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+}
+
+#modalPasswordReset .label-custom {
+    color: #d3d3d3;
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+    display: block;
+}
+
+#modalPasswordReset .input-custom {
+    background: #1d1b1a;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 4px;
+}
+
+#modalPasswordReset .input-otp {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    letter-spacing: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#modalPasswordReset .btn-primary-custom {
+    background: var(--primary-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.3s;
+    border: none;
+    color: #fff;
+}
+
+#modalPasswordReset .btn-primary-custom:hover {
+    background: #c75006;
+}
+
+#modalPasswordReset .btn-secondary-custom {
+    background: #444;
+    color: #d3d3d3;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+    border: none;
+}
+
+#modalPasswordReset .btn-secondary-custom:hover {
+    background: #555;
+}
+
+#modalPasswordReset .btn-final {
+    background: var(--primary-color);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    border: none;
+    color: #fff;
+}
+
+#modalPasswordReset .hidden {
+    display: none;
+}
+
+@media (max-width: 990px) {
+    .box {
+        height: auto;
+        max-width: 550px;
+        overflow: hidden;
+    }
+
+    .inner-box {
+        position: static;
+        transform: none;
+        width: revert;
+        height: revert;
+        padding: 2rem;
+    }
+
+    .forms-wrap {
+        position: revert;
+        width: 100%;
+        height: auto;
+    }
+
+    form {
+        max-width: revert;
+        padding: 1.5rem 2.5rem 2rem;
+        transition: transform 0.8s ease-in-out, opacity 0.45s linear;
+    }
+
+    .heading {
+        margin: 2rem 0;
+    }
+
+    form.sign-up-form {
+        transform: translateX(100%);
+    }
+
+    main.sign-up-mode form.sign-in-form {
+        transform: translateX(-100%);
+    }
+
+    main.sign-up-mode form.sign-up-form {
+        transform: translateX(0%);
+    }
+
+    .carousel {
+        display: none;
+    }
+}
+
+@media (max-width: 530px) {
+    main {
+        padding: 1rem;
+    }
+
+    .box {
+        border-radius: 4px;
+    }
+
+    .inner-box {
+        padding: 1rem;
+    }
+
+    form {
+        padding: 1rem 2rem 1.5rem;
+    }
+
+    .form__input-error {
+        font-size: 0.6rem;
+    }
+}

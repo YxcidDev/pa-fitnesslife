@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Life</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-gym">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="/img/logo-fitnesslife.png" alt="Logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Servicios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#classes">Clases</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#memberships">Planes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#comments">Comentarios</a>
+                        </li>
+                        <li class="nav-item" sec:authorize="isAuthenticated()">
+                            <a class="nav-link" href="/home">Panel Usuario</a>
+                        </li>
+                        <li class="nav-item auth-btn" sec:authorize="!isAuthenticated()">
+                            <a class="nav-link" th:href="@{/login}">Login</a>
+                        </li>
+                        <li class="nav-item auth-btn" sec:authorize="isAuthenticated()">
+                            <a class="nav-link" href="/logout">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section id="hero">
+            <div class="container">
+                <div class="row">
+                    <article class="col-lg-5">
+                        <div class="cont-photo">
+                            <img src="/img/img-hero.png" alt="">
+                        </div>
+                    </article>
+                    <article class="col-lg-7 cont-info">
+                        <h1>ES HORA<br><span>DE SER </span><span class="auto-type"></span></h1>
+                        <p>Bienvenido a nuestro gimnasio y centro de entrenamiento.<br>
+                            Dolorido hoy, fuerte mañana. Mejora tu condición física hoy.
+                        </p>
+                        <div class="row">
+                            <article class="col-md-4 featured">
+                                <h2>4.9<i class="fa-solid fa-star fa-xs span-hero"></i></h2>
+                                <p>Calificación promedio de especialistas de la plataforma de clientes.</p>
+                            </article>
+                            <article class="col-md-4 featured">
+                                <h2>10<span class="span-hero">K</span></h2>
+                                <p>Clientes satisfechos que han confiado en nosotros.</p>
+                            </article>
+                            <article class="col-md-4 featured">
+                                <h2>20<span class="span-hero">K</span></h2>
+                                <p>Sesiones completadas en nuestros centros de entrenamiento.</p>
+                            </article>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </header>
+    <main>
+        <section id="services">
+            <div class="container">
+                <h2>Nuestros Servicios</h2>
+                <p>Descubre todo lo que tenemos para ti: entrenamiento personalizado, clases grupales y asesoría
+                    profesional.<br>
+                    Transforma tu cuerpo, mejora tu salud y alcanza tus objetivos con nosotros.
+                </p>
+                <div class="row">
+                    <article class="col-lg-3 col-md-6">
+                        <div class="card-services">
+                            <img src="/img/service1.png" alt="Servicio 1">
+                            <h3>01</h3>
+                            <h4>Entrenamiento de fuerza</h4>
+                            <p>Mejora tu potencia y fuerza con programas seguros y eficaces.</p>
+                            <a href="#">Leer más</a>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-md-6">
+                        <div class="card-services">
+                            <img src="/img/service2.png" alt="Servicio 2">
+                            <h3>02</h3>
+                            <h4>Rutinas personalizadas gym</h4>
+                            <p>Diseñamos rutinas únicas según tus metas y condición física.</p>
+                            <a href="#">Leer más</a>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-md-6">
+                        <div class="card-services">
+                            <img src="/img/service3.png" alt="Servicio 3">
+                            <h3>03</h3>
+                            <h4>Sesiones grupales activas</h4>
+                            <p>Vive clases dinámicas con energía, ritmo y motivación total.</p>
+                            <a href="#">Leer más</a>
+                        </div>
+                    </article>
+                    <article class="col-lg-3 col-md-6">
+                        <div class="card-services">
+                            <img src="/img/service4.png" alt="Servicio 4">
+                            <h3>04</h3>
+                            <h4>Asesoría profesional gym</h4>
+                            <p>Recibe apoyo experto y constante para lograr tus objetivos.</p>
+                            <a href="#">Leer más</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="classes">
+            <div class="container">
+                <h2>Clases Destacadas</h2>
+                <div class="row">
+                    <article class="col-lg-4 card-classes">
+                        <img src="/img/spinning-featured.png" alt="Destacada 1">
+                        <div class="cont-info">
+                            <h3>Spinning</h3>
+                            <p>Jesús Calle</p>
+                        </div>
+                    </article>
+                    <article class="col-lg-4 card-classes">
+                        <img src="/img/box-featured.jpg" alt="Destacada 2">
+                        <div class="cont-info">
+                            <h3>Boxeo</h3>
+                            <p>Eder Arévalo</p>
+                        </div>
+                    </article>
+                    <article class="col-lg-4 card-classes">
+                        <img src="/img/zumba-featured.jpg" alt="Destacada 3">
+                        <div class="cont-info">
+                            <h3>Zumba</h3>
+                            <p>Samuel Alzate</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+        <section id="memberships">
+            <div class="container">
+                <h2>Selecciona un plan</h2>
+                <p>Bienvenido a nuestro gimnasio y centro de entrenamiento.<br>
+                    Dolorido hoy, fuerte mañana. Mejora tu condición física hoy.
+                </p>
+                <div class="container-fluid p-4" id="plans">
+                    <div class="row d-flex justify-content-center align-items-center flex-wrap mt-5">
+
+                        <div th:each="plan : ${availablePlans}" class="card border-0 shadow-sm card-plan m-2">
+                            <div class="card-body px-4 py-5">
+                                <div class="text-center text-lg-start">
+                                    <h2 class="h4" th:text="${plan.planName}">Básico</h2>
+
+                                    <div class="mt-4">
+                                        <p class="mb-0">
+                                            <span class="display-5 fw-light plan-price"
+                                                th:text="${#numbers.formatDecimal(plan.price ?: 0, 0, 'COMMA', 0, 'POINT')}">50,000</span>
+                                            <span class="fs-6 fw-medium plan-period">/mes</span>
+                                        </p>
+
+                                        <div class="plan-benefits mt-5">
+                                            <div th:each="benefit : ${plan.benefits}">
+                                                <span class="fw-medium" th:text="${benefit}">Beneficio</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-0 px-4 pb-4">
+                                <a th:href="@{/contacto(planId=${plan.id})}" class="btn btn-color w-100 fw-semibold">
+                                    Empezar Ahora
+                                </a>
+                            </div>
+                        </div>
+
+                        <div th:if="${#lists.isEmpty(availablePlans)}" class="text-center">
+                            <p>No hay planes disponibles en este momento.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="comments">
+            <div class="container">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <p class="subtitle">Testimonios reales de personas que transformaron su vida</p>
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="comment-card">
+                                <img src="/img/user1.jpg" alt="Usuario 1" class="comment-avatar">
+                                <h3>Ronnie Coleman</h3>
+                                <p class="comment-role">Miembro Premium</p>
+                                <p class="comment-text">"Llevo 6 meses entrenando aquí y los resultados son increíbles.
+                                    Los entrenadores son muy profesionales y el ambiente es motivador. ¡Totalmente
+                                    recomendado!"</p>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="comment-card">
+                                <img src="/img/user2.jpg" alt="Usuario 2" class="comment-avatar">
+                                <h3>Dorian Yates</h3>
+                                <p class="comment-role">Miembro Elite</p>
+                                <p class="comment-text">"Las instalaciones son de primera y el plan personalizado me
+                                    ayudó a alcanzar mis objetivos mucho más rápido de lo que esperaba. Excelente
+                                    inversión en mi salud."</p>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="comment-card">
+                                <img src="/img/user3.avif" alt="Usuario 3" class="comment-avatar">
+                                <h3>Arnold Schwarzenegger</h3>
+                                <p class="comment-role">Miembro Básico</p>
+                                <p class="comment-text">"Me encanta la variedad de clases grupales. El personal siempre
+                                    está dispuesto a ayudar y la comunidad es muy acogedora. ¡Mejor decisión que he
+                                    tomado!"</p>
+                                <div class="stars">
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                    <i class="bi bi-star-fill text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleSlidesOnly" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="text-white pt-5 pb-4">
+        <div class="container text-center text-md-start">
+            <div class="row text-center text-md-start">
+                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                    <img src="/img/logo-fitnesslife.png" alt="Logo" class="img-footer">
+                    <p class="p-footer">¡Vive más fuerte, vive mejor!</p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold">Servicios</h5>
+                    <hr class="mb-4">
+                    <p>
+                        <a href="#services" class="text-white">Entrenamiento de fuerza</a>
+                    </p>
+                    <p>
+                        <a href="#services" class="text-white">Rutinas personalizadas</a>
+                    </p>
+                    <p>
+                        <a href="#services" class="text-white">Sesiones grupales activas</a>
+                    </p>
+                    <p>
+                        <a href="#services" class="text-white">Asesoría profesional</a>
+                    </p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold">Nosotros</h5>
+                    <hr class="mb-4">
+                    <p>
+                        <a href="#" class="text-white">Sobre nosotros</a>
+                    </p>
+                    <p>
+                        <a href="#" class="text-white">Equipo</a>
+                    </p>
+                    <p>
+                        <a href="#comments" class="text-white">Testimonios y comunidad</a>
+                    </p>
+                    <p>
+                        <a href="#classes" class="text-white">Programas de entrenamiento</a>
+                    </p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                    <h5 class="text-uppercase mb-4 font-weight-bold">Contacto</h5>
+                    <hr class="mb-4">
+                    <p>
+                        <i class="bi bi-house-fill me-3"></i>Cartagena
+                    </p>
+                    <p>
+                        <i class="bi bi-envelope-fill me-3"></i>info@fitnesslife.com
+                    </p>
+                    <p>
+                        <i class="bi bi-telephone-fill me-3"></i> +57 323 4580755
+                    <p>
+                        <i class="bi bi-printer-fill me-3"></i> +57 317 3029226
+                    </p>
+                </div>
+                <hr class="mb-4">
+                <div class="text-center mb-2">
+                    <p>© 2025 Fitness Life. Todos los derechos reservados.<br>
+                        Desarrollado por <a href="#">Samuel Alzate</a>, <a href="#">Eder Arévalo</a>, <a href="#">Jesús
+                            Calle</a> y <a href="#">Antonio Royero</a>.
+                    </p>
+                </div>
+                <div class="text-center">
+                    <ul class="list-unstyled list-inline">
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white"><i class="bi bi-google"></i></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white"><i class="bi bi-linkedin"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script th:src="@{/js/text-typing.js}"></script>
+</body>
+
+</html>

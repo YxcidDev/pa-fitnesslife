@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clases - Dashboard</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/admin-sidebar.css}">
+    <link rel="stylesheet" th:href="@{/css/admin-classes.css}">
+</head>
+<body>
+    <th:block th:insert="~{fragments/navdashboard :: sidebar}"></th:block>
+    <div class="main-content">
+        <div class="container-fluid p-4">
+            <h1 class="page-title">Clases</h1>
+            <div class="classes-container">
+                <div class="d-flex justify-content-end mb-4">
+                    <button class="btn btn-add-class" data-bs-toggle="modal" data-bs-target="#formModal">
+                        Nueva clase
+                    </button>
+                </div>
+
+                <div class="section-header">
+                    <h3>Clases de hoy</h3>
+                    <span class="section-count" th:text="${#lists.size(clases)} + ' clases'">0 clases</span>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mb-5"
+                    th:if="${!#lists.isEmpty(clases)}">
+                    <div class="col" th:each="training : ${clases}">
+                        <form th:action="@{/trainings/update}" method="post" class="training-form h-100">
+                            <input type="hidden" name="id" th:value="${training.id}">
+                            <div class="class-card h-100">
+                                <div class="class-header">
+                                    <h5 class="view-mode" th:text="${training.nameTraining}"></h5>
+                                    <select name="nameTraining" class="form-select edit-mode" style="display:none;">
+                                        <option value="Zumba" th:selected="${training.nameTraining == 'Zumba'}">Zumba</option>
+                                        <option value="Boxeo" th:selected="${training.nameTraining == 'Boxeo'}">Boxeo</option>
+                                        <option value="Crossfit" th:selected="${training.nameTraining == 'Crossfit'}">Crossfit</option>
+                                        <option value="Yoga" th:selected="${training.nameTraining == 'Yoga'}">Yoga</option>
+                                        <option value="Spinning" th:selected="${training.nameTraining == 'Spinning'}">Spinning</option>
+                                        <option value="IronCWorkout" th:selected="${training.nameTraining == 'IronCWorkout'}">IronCWorkout</option>
+                                    </select>
+
+                                    <p class="view-mode mb-0" th:text="${training.instructor}"></p>
+                                    <select name="instructor" class="form-select edit-mode" style="display:none;">
+                                        <option value="" disabled>Seleccione un instructor</option>
+                                        <option th:each="trainer : ${trainers}"
+                                                th:value="${trainer.name + ' ' + trainer.lastname}"
+                                                th:text="${trainer.name + ' ' + trainer.lastname}"
+                                                th:selected="${training.instructor != null and training.instructor == trainer.name + ' ' + trainer.lastname}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="class-body">
+                                    <div class="class-info-row">
+                                        <strong>Fecha:</strong>
+                                        <span class="view-mode"
+                                            th:text="${#dates.format(training.datetime, 'dd/MM/yyyy')}"></span>
+                                        <input type="date" name="date"
+                                            th:value="${#dates.format(training.datetime, 'yyyy-MM-dd')}"
+                                            class="form-control edit-mode" style="display:none;">
+                                    </div>
+                                    <div class="class-info-row">
+                                        <strong>Hora:</strong>
+                                        <span class="view-mode"
+                                            th:text="${#dates.format(training.datetime, 'HH:mm')}"></span>
+                                        <input type="time" name="time"
+                                            th:value="${#dates.format(training.datetime, 'HH:mm')}"
+                                            class="form-control edit-mode" style="display:none;">
+                                    </div>
+                                    <div class="class-info-row">
+                                        <strong>Sala:</strong>
+                                        <span class="view-mode" th:text="${training.room}"></span>
+                                        <select name="room" class="form-select edit-mode" style="display:none;">
+                                            <option value="Sala A" th:selected="${training.room == 'Sala A'}">Sala A</option>
+                                            <option value="Sala B" th:selected="${training.room == 'Sala B'}">Sala B</option>
+                                            <option value="Sala C" th:selected="${training.room == 'Sala C'}">Sala C</option>
+                                            <option value="Sala D" th:selected="${training.room == 'Sala D'}">Sala D</option>
+                                        </select>
+                                    </div>
+                                    <div class="capacity-section">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Inscritos</span>
+                                            <strong th:text="${#lists.size(training.userIds)} + '/' + ${training.maximumCapacity}">0/20</strong>
+                                        </div>
+                                        <div class="capacity-bar">
+                                            <div class="capacity-fill"
+                                                th:style="|width: ${#lists.size(training.userIds) * 100 / training.maximumCapacity}%|">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="class-actions">
+                                    <button type="button" class="btn btn-action-edit view-mode">Editar</button>
+                                    <button type="submit" class="btn btn-action-save edit-mode" style="display:none;">Guardar</button>
+                                    <button type="button" class="btn btn-action-cancel edit-mode" style="display:none;">Cancelar</button>
+                                    <button type="submit" class="btn btn-action-delete"
+                                        th:formaction="@{/trainings/delete/{id}(id=${training.id})}"
+                                        onclick="return confirm('¿Eliminar esta clase?')">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="empty-state" th:if="${#lists.isEmpty(clases)}">
+                    <p>No hay clases programadas para hoy</p>
+                </div>
+
+                <div class="section-header mt-5">
+                    <h3>Todas las Clases</h3>
+                    <span class="section-count" th:text="${total} + ' clases'">0 clases</span>
+                </div>
+                <div class="filters-container mb-4">
+                    <div class="btn-group" role="group">
+                        <a th:href="@{/admin/functionalTraining(filtro='hoy')}" class="btn btn-filter"
+                            th:classappend="${filtro == 'hoy'} ? 'active' : ''">Hoy</a>
+                        <a th:href="@{/admin/functionalTraining(filtro='semana')}" class="btn btn-filter"
+                            th:classappend="${filtro == 'semana'} ? 'active' : ''">Esta semana</a>
+                        <a th:href="@{/admin/functionalTraining(filtro='mes')}" class="btn btn-filter"
+                            th:classappend="${filtro == 'mes'} ? 'active' : ''">Este mes</a>
+                        <a th:href="@{/admin/functionalTraining(filtro='todas')}" class="btn btn-filter"
+                            th:classappend="${filtro == 'todas'} ? 'active' : ''">Todas</a>
+                    </div>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-3 mb-4">
+                    <div class="col" th:each="training : ${trainings}">
+                        <form th:action="@{/trainings/update}" method="post" class="training-form h-100">
+                            <input type="hidden" name="id" th:value="${training.id}">
+                            <div class="class-card h-100">
+                                <div class="class-header">
+                                    <h5 class="view-mode" th:text="${training.nameTraining}"></h5>
+                                    <select name="nameTraining" class="form-select edit-mode" style="display:none;">
+                                        <option value="Zumba" th:selected="${training.nameTraining == 'Zumba'}">Zumba</option>
+                                        <option value="Boxeo" th:selected="${training.nameTraining == 'Boxeo'}">Boxeo</option>
+                                        <option value="Crossfit" th:selected="${training.nameTraining == 'Crossfit'}">Crossfit</option>
+                                        <option value="Yoga" th:selected="${training.nameTraining == 'Yoga'}">Yoga</option>
+                                        <option value="Spinning" th:selected="${training.nameTraining == 'Spinning'}">Spinning</option>
+                                        <option value="IronCWorkout" th:selected="${training.nameTraining == 'IronCWorkout'}">IronCWorkout</option>
+                                    </select>
+
+                                    <p class="view-mode mb-0" th:text="${training.instructor}"></p>
+                                    <select name="instructor" class="form-select edit-mode" style="display:none;">
+                                        <option value="" disabled>Seleccione un instructor</option>
+                                        <option th:each="trainer : ${trainers}"
+                                                th:value="${trainer.name + ' ' + trainer.lastname}"
+                                                th:text="${trainer.name + ' ' + trainer.lastname}"
+                                                th:selected="${training.instructor != null and training.instructor == trainer.name + ' ' + trainer.lastname}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="class-body">
+                                    <div class="class-info-row">
+                                        <strong>Fecha:</strong>
+                                        <span class="view-mode"
+                                            th:text="${training.datetime != null ? #dates.format(training.datetime, 'dd/MM/yyyy') : 'Sin fecha'}"></span>
+                                        <input type="date" name="date"
+                                            th:value="${training.datetime != null ? #dates.format(training.datetime, 'yyyy-MM-dd') : ''}"
+                                            class="form-control edit-mode" style="display:none;">
+                                    </div>
+                                    <div class="class-info-row">
+                                        <strong>Hora:</strong>
+                                        <span class="view-mode"
+                                            th:text="${training.datetime != null ? #dates.format(training.datetime, 'HH:mm') : 'Sin hora'}"></span>
+                                        <input type="time" name="time"
+                                            th:value="${training.datetime != null ? #dates.format(training.datetime, 'HH:mm') : ''}"
+                                            class="form-control edit-mode" style="display:none;">
+                                    </div>
+                                    <div class="class-info-row">
+                                        <strong>Sala:</strong>
+                                        <span class="view-mode" th:text="${training.room}"></span>
+                                        <select name="room" class="form-select edit-mode" style="display:none;">
+                                            <option value="Sala A" th:selected="${training.room == 'Sala A'}">Sala A</option>
+                                            <option value="Sala B" th:selected="${training.room == 'Sala B'}">Sala B</option>
+                                            <option value="Sala C" th:selected="${training.room == 'Sala C'}">Sala C</option>
+                                            <option value="Sala D" th:selected="${training.room == 'Sala D'}">Sala D</option>
+                                        </select>
+                                    </div>
+                                    <div class="capacity-section">
+                                        <div class="d-flex justify-content-between mb-2">
+                                            <span>Inscritos</span>
+                                            <strong th:text="${training.userIds != null ? #lists.size(training.userIds) + '/' + training.maximumCapacity : '0/' + training.maximumCapacity}">0/20</strong>
+                                        </div>
+                                        <div class="capacity-bar">
+                                            <div class="capacity-fill"
+                                                th:style="${training.userIds != null ? 'width: ' + (#lists.size(training.userIds) * 100 / training.maximumCapacity) + '%' : 'width: 0%'}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="class-actions">
+                                    <button type="button" class="btn btn-action-edit view-mode">Editar</button>
+                                    <button type="submit" class="btn btn-action-save edit-mode" style="display:none;">Guardar</button>
+                                    <button type="button" class="btn btn-action-cancel edit-mode" style="display:none;">Cancelar</button>
+                                    <button type="submit" class="btn btn-action-delete"
+                                        th:formaction="@{/trainings/delete/{id}(id=${training.id})}"
+                                        onclick="return confirm('¿Eliminar esta clase?')">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-4" th:if="${totalPages > 1}">
+                    <div class="pagination-info">
+                        Página <strong th:text="${page + 1}"></strong> de <strong th:text="${totalPages}"></strong>
+                    </div>
+                    <nav>
+                        <ul class="pagination mb-0">
+                            <li class="page-item" th:classappend="${page == 0} ? 'disabled'">
+                                <a class="page-link" th:href="@{/admin/functionalTraining(filtro=${filtro}, page=0)}">
+                                    <i class="bi bi-chevron-double-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item" th:classappend="${page == 0} ? 'disabled'">
+                                <a class="page-link" th:href="@{/admin/functionalTraining(filtro=${filtro}, page=${page - 1})}">
+                                    <i class="bi bi-chevron-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                                th:if="${i >= page - 2 && i <= page + 2}" th:classappend="${i == page} ? 'active'">
+                                <a class="page-link" th:href="@{/admin/functionalTraining(filtro=${filtro}, page=${i})}"
+                                    th:text="${i + 1}">1</a>
+                            </li>
+                            <li class="page-item" th:classappend="${page + 1 >= totalPages} ? 'disabled'">
+                                <a class="page-link" th:href="@{/admin/functionalTraining(filtro=${filtro}, page=${page + 1})}">
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+                            </li>
+                            <li class="page-item" th:classappend="${page + 1 >= totalPages} ? 'disabled'">
+                                <a class="page-link" th:href="@{/admin/functionalTraining(filtro=${filtro}, page=${totalPages - 1})}">
+                                    <i class="bi bi-chevron-double-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="formModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content modal-bodytec">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar nueva clase</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form th:action="@{/trainings/save}" method="post" class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nameTraining" class="form-label">Nombre del entrenamiento</label>
+                            <select class="form-select" id="nameTraining" name="nameTraining" required>
+                                <option value="" disabled selected>Seleccione un entrenamiento</option>
+                                <option value="Zumba">Zumba</option>
+                                <option value="Boxeo">Boxeo</option>
+                                <option value="Crossfit">Crossfit</option>
+                                <option value="Yoga">Yoga</option>
+                                <option value="Spinning">Spinning</option>
+                                <option value="IronCWorkout">IronCWorkout</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="instructor" class="form-label">Instructor</label>
+                            <select class="form-select" id="instructor" name="instructor" required>
+                                <option value="" disabled selected>Seleccione un instructor</option>
+                                <option th:each="trainer : ${trainers}"
+                                        th:value="${trainer.name + ' ' + trainer.lastname}"
+                                        th:text="${trainer.name + ' ' + trainer.lastname}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="description" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="description" name="description" rows="2"
+                                placeholder="Breve descripción de la clase..."></textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="datetime" class="form-label">Fecha y hora</label>
+                            <input type="datetime-local" class="form-control" id="datetime" name="datetime" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="room" class="form-label">Sala</label>
+                            <select class="form-select" id="room" name="room" required>
+                                <option value="">Selecciona una sala</option>
+                                <option value="Sala A">Sala A</option>
+                                <option value="Sala B">Sala B</option>
+                                <option value="Sala C">Sala C</option>
+                                <option value="Sala D">Sala D</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="maximumCapacity" class="form-label">Capacidad máxima</label>
+                            <input type="number" class="form-control" id="maximumCapacity" name="maximumCapacity"
+                                min="1" max="50" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="duration" class="form-label">Duración (minutos)</label>
+                            <input type="text" class="form-control" id="duration" name="duration" placeholder="Ej: 45"
+                                required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary-modal" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary-modal">Crear clase</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/functionalTraining.js}"></script>
+</body>
+</html>

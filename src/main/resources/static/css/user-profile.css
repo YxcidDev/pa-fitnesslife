@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+    --bg-body: #1d1b1a;
+    --primary-color: #eb6608;
+    --card-bg: #323333;
+    --text-white: #ffffff;
+    --text-gray: #d3d3d3;
+    --hover-primary: #c75006;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+p,
+a,
+li,
+td,
+input,
+label,
+select {
+    font-family: 'Work Sans', sans-serif;
+}
+
+body {
+    background: var(--bg-body);
+    min-height: 100vh;
+    color: var(--text-white);
+}
+
+.plan-card {
+    background: var(--card-bg);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+    margin: 3rem auto 3rem;
+    max-width: 1400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.plan-badge {
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--primary-color);
+    padding: 6px 20px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.plan-name {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-white);
+    margin: 1rem 0 0.5rem;
+    text-align: center;
+}
+
+.plan-status {
+    text-align: center;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.plan-status i {
+    font-size: 16px;
+}
+
+.info-cards-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem 8rem;
+}
+
+.info-card {
+    background: var(--card-bg);
+    border-radius: 4px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: .3s;
+}
+
+.info-card:hover {
+    background: #3a3b3b;
+}
+
+.card-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+}
+
+.card-icon-wrapper img {
+    width: 28px;
+    height: 28px;
+}
+
+.card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-label {
+    font-size: 12px;
+    color: var(--text-gray);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.card-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-white);
+    word-break: break-word;
+}
+
+.card-value .view-mode {
+    display: inline-block;
+}
+
+.card-value .edit-mode {
+    background: var(--bg-body);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    width: 100%;
+    transition: .3s;
+}
+
+.card-value .edit-mode:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.card-value .form-select {
+    background: var(--bg-body);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-white);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+    margin-bottom: 8px;
+    width: 100%;
+    transition: .3s;
+}
+
+.card-value .form-select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.d-flex.justify-content-center {
+    max-width: 1400px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.profile-edit-btn {
+    background: var(--primary-color);
+    color: var(--text-white);
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    width: 20%;
+    font-weight: 600;
+    transition: .3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.profile-edit-btn:hover {
+    background: var(--hover-primary);
+}
+
+.profile-cancel-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-white);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 12px 24px;
+    width: 20%;
+    font-weight: 600;
+    transition: .3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+}
+
+.profile-cancel-btn:hover {
+    background: #5a5b5b;
+}
+
+#saveBtn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .profile-background {
+        padding: 1.5rem 0 3rem;
+    }
+
+    .profile-header {
+        padding: 0 1rem;
+    }
+
+    .profile-photo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .user-name-text {
+        font-size: 20px;
+    }
+
+    .plan-card {
+        margin: -2rem 1rem 2rem;
+        padding: 1.25rem;
+    }
+
+    .plan-name {
+        font-size: 24px;
+    }
+
+    .info-cards-container {
+        padding: 0 1rem 6rem;
+    }
+
+    .d-flex.justify-content-center {
+        padding: 0 1rem;
+        margin: 2rem auto 0;
+    }
+}
+
+@media (max-width: 530px) {
+    .profile-background {
+        padding: 1rem 0 2.5rem;
+    }
+
+    .profile-header {
+        padding: 0 0.75rem;
+    }
+
+    .profile-photo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .user-name-text {
+        font-size: 18px;
+    }
+
+    .plan-card {
+        margin: 1.5rem 0.75rem 1.5rem;
+    }
+
+    .card-icon-wrapper {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+    }
+
+    .card-icon-wrapper img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .card-icon-wrapper i {
+        font-size: 20px;
+    }
+
+    .card-value {
+        font-size: 14px;
+    }
+
+    .edit-profile-btn {
+        padding: 10px 24px;
+        font-size: 14px;
+    }
+
+    .info-cards-container {
+        padding: 0 0.75rem 6rem;
+    }
+
+    .d-flex.justify-content-center {
+        padding: 0 1rem;
+        margin: 2rem 0 0;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .profile-cancel-btn,
+    .profile-edit-btn {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}

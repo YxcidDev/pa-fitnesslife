@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pérfil</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" th:href="@{/css/user-profile.css}">
+</head>
+
+<body>
+    <th:block th:insert="~{fragments/top-navbar}"></th:block>
+
+    <div class="plan-card">
+        <span class="plan-badge">Plan actual</span>
+        <h2 class="plan-name">
+            <span th:text="${currentUser.plan != null ? currentUser.plan : 'Sin plan'}"></span>
+        </h2>
+        <div class="plan-status" th:classappend="${currentUser.active} ? ' text-success' : ' text-danger'">
+            <span th:text="${currentUser.active} ? 'Activo' : 'Inactivo'"></span>
+        </div>
+    </div>
+
+    <form action="/actualizarUserPerfil" method="post">
+        <div class="info-cards-container">
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-person-vcard-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">ID de usuario</div>
+                    <div class="card-value">
+                        <span th:text="${currentUser.identification}" class="view-mode"></span>
+                        <input type="text" th:value="${currentUser.identification}" class="edit-mode form-control"
+                            readonly style="display:none; outline: 0; border: none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-person-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Nombre completo</div>
+                    <div class="card-value">
+                        <span th:text="${currentUser.name} + ' ' + ${currentUser.lastname}" class="view-mode"></span>
+                        <input type="text" th:value="${currentUser.name}" name="name" class="edit-mode form-control"
+                            style="display:none;">
+                        <input type="text" th:value="${currentUser.lastname}" name="lastname"
+                            class="edit-mode form-control" style="display:none;">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-envelope-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Correo electrónico</div>
+                    <div class="card-value">
+                        <span th:text="${currentUser.email}" class="view-mode"></span>
+                        <input type="email" th:value="${currentUser.email}" class="edit-mode form-control" readonly
+                            style="display:none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-telephone-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Teléfono</div>
+                    <div class="card-value">
+                        <span th:text="${currentUser.phone != null ? currentUser.phone : 'No registrado'}"
+                            class="view-mode"></span>
+                        <input type="text" th:value="${currentUser.phone}" name="phone" class="edit-mode form-control"
+                            style="display:none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-droplet-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Tipo de sangre</div>
+                    <div class="card-value">
+                        <span th:text="${currentUser.bloodType != null ? 
+                           currentUser.bloodType.name().replace('_POSITIVE', '+').replace('_NEGATIVE', '-') 
+                           : 'No registrado'}" class="view-mode"></span>
+
+                        <select name="bloodType" class="edit-mode form-select" style="display:none;">
+                            <option value="">Seleccionar...</option>
+                            <option value="A_POSITIVE" th:selected="${currentUser.bloodType?.name() == 'A_POSITIVE'}">A+
+                            </option>
+                            <option value="A_NEGATIVE" th:selected="${currentUser.bloodType?.name() == 'A_NEGATIVE'}">A-
+                            </option>
+                            <option value="B_POSITIVE" th:selected="${currentUser.bloodType?.name() == 'B_POSITIVE'}">B+
+                            </option>
+                            <option value="B_NEGATIVE" th:selected="${currentUser.bloodType?.name() == 'B_NEGATIVE'}">B-
+                            </option>
+                            <option value="AB_POSITIVE" th:selected="${currentUser.bloodType?.name() == 'AB_POSITIVE'}">
+                                AB+</option>
+                            <option value="AB_NEGATIVE" th:selected="${currentUser.bloodType?.name() == 'AB_NEGATIVE'}">
+                                AB-</option>
+                            <option value="O_POSITIVE" th:selected="${currentUser.bloodType?.name() == 'O_POSITIVE'}">O+
+                            </option>
+                            <option value="O_NEGATIVE" th:selected="${currentUser.bloodType?.name() == 'O_NEGATIVE'}">O-
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-cake-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Día de nacimiento</div>
+                    <div class="card-value">
+                        <span
+                            th:text="${currentUser.birthDate != null ? #temporals.format(currentUser.birthDate, 'dd/MM/yyyy') : 'No registrado'}"
+                            class="view-mode"></span>
+                        <input type="date" th:value="${currentUser.birthDate}" name="birthDate"
+                            class="edit-mode form-control" style="display:none;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-people-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Sexo</div>
+                    <div class="card-content">
+                        <span th:text="${currentUser.sex != null ? 
+                           (currentUser.sex.name() == 'MALE' ? 'Masculino' : 
+                            currentUser.sex.name() == 'FEMALE' ? 'Femenino' : 'Otro') 
+                           : 'No registrado'}" class="view-mode"></span>
+
+                        <select name="sex" class="edit-mode form-select" style="display:none;">
+                            <option value="">Seleccionar...</option>
+                            <option value="MALE" th:selected="${currentUser.sex?.name() == 'MALE'}">Masculino</option>
+                            <option value="FEMALE" th:selected="${currentUser.sex?.name() == 'FEMALE'}">Femenino
+                            </option>
+                            <option value="OTHER" th:selected="${currentUser.sex?.name() == 'OTHER'}">Otro</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="card-icon-wrapper">
+                    <i class="bi bi-calendar-check-fill" style="color: var(--primary-color); font-size: 24px;"></i>
+                </div>
+                <div class="card-content">
+                    <div class="card-label">Miembro desde</div>
+                    <div class="card-value">
+                        <span
+                            th:text="${currentUser.createdAt != null ? #temporals.format(currentUser.createdAt, 'MMMM yyyy') : 'Fecha no disponible'}"
+                            class="view-mode"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                <button type="button" id="editBtn" class="profile-edit-btn">
+                    Editar pérfil
+                </button>
+                <button type="button" id="cancelBtn" class="profile-cancel-btn ms-2" style="display: none;">
+                    Cancelar
+                </button>
+                <button type="submit" id="saveBtn" class="profile-edit-btn ms-2">
+                    Guardar
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    <div th:replace="fragments/bottom-navbar :: bottom-navbar"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/user-profile-btn.js}"></script>
+    <script th:src="@{/js/active-gym-count.js}"></script>
+</body>
+
+</html>

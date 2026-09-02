@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio</title>
+    <link rel="icon" type="image/png" th:href="@{/img/icons/logo-fl.png}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" th:href="@{/css/navbar.css}" />
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
+</head>
+
+<body>
+    <th:block th:insert="~{fragments/top-navbar}"></th:block>
+
+    <a href="/dashboard" sec:authorize="hasRole('ADMIN')" class="admin-btn">
+        <i class="bi bi-person-lock"></i>
+    </a>
+
+    <div class="dashboard-container">
+        <section class="classes-section">
+            <div class="section-header">
+                <h2 class="section-title">Próximas clases</h2>
+                <a href="/clases" class="section-link">
+                    Ver todas
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="classes-filter-bar">
+                <div class="filter-input-wrapper">
+                    <i class="bi bi-search filter-icon"></i>
+                    <input type="text" id="filterName" class="filter-input"
+                        placeholder="Buscar por nombre de clase..." />
+                </div>
+                <div class="filter-input-wrapper">
+                    <i class="bi bi-person filter-icon"></i>
+                    <select id="filterInstructor" class="filter-select">
+                        <option value="">Todos los instructores</option>
+                    </select>
+                </div>
+                <button id="btnClearFilters" class="btn-clear-filters" style="display: none">
+                    <i class="bi bi-x-lg"></i> Limpiar
+                </button>
+            </div>
+
+            <div class="classes-carousel" id="classesCarousel">
+                <div th:each="training : ${trainings}" class="carousel-item-wrapper real-card"
+                    th:data-instructor="${training.instructor}" th:data-name="${training.nameTraining}">
+                    <div class="class-card">
+                        <span th:if="${!hasActivePlan}" class="badge-no-plan">
+                            <i class="bi bi-lock-fill"></i> Requiere membresía
+                        </span>
+                        <div class="class-card-top">
+                            <h3 class="class-title" th:text="${training.nameTraining}">
+                                Spinning
+                            </h3>
+                            <p class="class-instructor">
+                                <span>Entrenador:</span>
+                                <span th:text="${training.instructor}">Instructor</span>
+                            </p>
+                        </div>
+                        <div class="class-details">
+                            <div class="detail-item">
+                                <span>Fecha:</span>
+                                <span th:text="${#dates.format(training.datetime, 'EEEE, d MMMM')}">Lunes, 15
+                                    Enero</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Hora:</span>
+                                <span th:text="${#dates.format(training.datetime, 'h:mm a')}">6:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Salón:</span>
+                                <span th:text="${training.room}">Sala 1</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Inscritos:</span>
+                                <span th:text="${#lists.size(training.userIds)}">0</span>
+                            </div>
+                        </div>
+                        <div class="class-action">
+                            <div th:if="${hasActivePlan}">
+                                <div th:if="${#lists.size(training.userIds) >= training.maximumCapacity}">
+                                    <button class="btn-class btn-full" disabled>
+                                        Clase llena
+                                    </button>
+                                </div>
+                                <div
+                                    th:if="${#lists.size(training.userIds) < training.maximumCapacity and training.status.name() != 'INACTIVE'}">
+                                    <form th:if="${!training.userIds.contains(identification)}"
+                                        th:action="@{/inscribirme/{id}(id=${training.idFunctionalTraining})}"
+                                        method="post">
+                                        <button class="btn-class btn-primary">Inscribirme</button>
+                                    </form>
+                                    <button th:if="${training.userIds.contains(identification)}"
+                                        class="btn-class btn-enrolled" disabled>
+                                        Ya inscrito
+                                    </button>
+                                </div>
+                                <div th:if="${training.status.name() == 'INACTIVE'}">
+                                    <button class="btn-class btn-inactive" disabled>
+                                        Clase finalizada
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item-wrapper ph-card" id="ph-1">
+                    <div class="class-card class-card--placeholder">
+                        <div class="placeholder-inner">
+                            <i class="bi bi-calendar2-plus placeholder-icon"></i>
+                            <p class="placeholder-title">Más clases próximamente</p>
+                            <p class="placeholder-sub">
+                                Nuestro equipo está preparando nuevas sesiones para ti
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item-wrapper ph-card" id="ph-2">
+                    <div class="class-card class-card--placeholder">
+                        <div class="placeholder-inner">
+                            <i class="bi bi-calendar2-plus placeholder-icon"></i>
+                            <p class="placeholder-title">Más clases próximamente</p>
+                            <p class="placeholder-sub">
+                                Nuestro equipo está preparando nuevas sesiones para ti
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="classes-no-results d-none" id="classesNoResults">
+                <i class="bi bi-search"></i>
+                <p>No hay clases que coincidan con tu búsqueda</p>
+                <button id="btnNoResultsClear">Limpiar filtros</button>
+            </div>
+        </section>
+
+        <section class="workouts-section">
+            <div class="section-header">
+                <h2 class="section-title">Nuestra colección</h2>
+            </div>
+
+            <div class="workouts-grid">
+                <a href="https://www.youtube.com/watch?v=oCtrksNCiKk" target="_blank" class="workout-card">
+                    <div class="workout-overlay">
+                        <img src="/img/class1.png" alt="Espalda y Hombros" class="workout-img" />
+                    </div>
+                    <div class="workout-info">
+                        <h3 class="workout-title">Espalda y hombros</h3>
+                        <div class="workout-meta">
+                            <span class="meta-item"> Minutos: 5:08 </span>
+                            <span class="meta-item"> 4.5 </span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=VB09kLgJDo0" target="_blank" class="workout-card">
+                    <div class="workout-overlay">
+                        <img src="/img/class2.png" alt="Pecho y Abdomen" class="workout-img" />
+                    </div>
+                    <div class="workout-info">
+                        <h3 class="workout-title">Pecho y abdomen</h3>
+                        <div class="workout-meta">
+                            <span class="meta-item"> Minutos: 4:53 </span>
+                            <span class="meta-item"> Calificación: 4.0 </span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=_hkUNgX9e54" target="_blank" class="workout-card">
+                    <div class="workout-overlay">
+                        <img src="/img/class3.png" alt="Brazo" class="workout-img" />
+                    </div>
+                    <div class="workout-info">
+                        <h3 class="workout-title">Brazo</h3>
+                        <div class="workout-meta">
+                            <span class="meta-item"> Minutos: 8:11 </span>
+                            <span class="meta-item"> Calificación: 5.0 </span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://www.youtube.com/watch?v=LFR7BPbLmTc" target="_blank" class="workout-card">
+                    <div class="workout-overlay">
+                        <img src="/img/class4.png" alt="Pierna y Glúteos" class="workout-img" />
+                    </div>
+                    <div class="workout-info">
+                        <h3 class="workout-title">Pierna y glúteos</h3>
+                        <div class="workout-meta">
+                            <span class="meta-item"> Minutos: 7:13 </span>
+                            <span class="meta-item"> Calificación: 4.5 </span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="team-section">
+            <div class="section-header">
+                <h2 class="section-title">Nuestro equipo</h2>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Maria+Lopez&background=eb6608&color=fff&size=80"
+                            alt="María López" />
+                    </div>
+                    <h3 class="team-name">Laura Martínez</h3>
+                    <p class="team-role">Entrenadora personal</p>
+                    <p class="team-specialty">Yoga y pilates</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carlos+Ruiz&background=eb6608&color=fff&size=80"
+                            alt="Carlos Ruiz" />
+                    </div>
+                    <h3 class="team-name">Pedro Sánchez</h3>
+                    <p class="team-role">Instructor</p>
+                    <p class="team-specialty">Spinning y cardio</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Ana+Garcia&background=eb6608&color=fff&size=80"
+                            alt="Ana García" />
+                    </div>
+                    <h3 class="team-name">Ana García</h3>
+                    <p class="team-role">Nutricionista</p>
+                    <p class="team-specialty">Planes alimenticios</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Juan+Perez&background=eb6608&color=fff&size=80"
+                            alt="Juan Pérez" />
+                    </div>
+                    <h3 class="team-name">Antonio Royero</h3>
+                    <p class="team-role">Entrenador</p>
+                    <p class="team-specialty">Fuerza y musculación</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="confirmed-section" id="clases">
+            <div class="section-header">
+                <h2 class="section-title">Mis clases confirmadas</h2>
+            </div>
+
+            <div class="confirmed-carousel">
+                <div th:each="confirmedClass : ${confirmedClasses}" class="carousel-item-wrapper">
+                    <div class="confirmed-card">
+                        <span class="badge-confirmed"> Confirmada </span>
+
+                        <div class="class-card-top">
+                            <h3 class="class-title" th:text="${confirmedClass.nameTraining}">
+                                Spinning
+                            </h3>
+                            <p class="class-instructor">
+                                <span>Entrenador:</span>
+                                <span th:text="${confirmedClass.instructor}">Instructor</span>
+                            </p>
+                        </div>
+
+                        <div class="class-details">
+                            <div class="detail-item">
+                                <span>Fecha:</span>
+                                <span th:text="${#dates.format(confirmedClass.datetime, 'EEEE, d MMMM')}">Lunes, 15
+                                    Enero</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Hora:</span>
+                                <span th:text="${#dates.format(confirmedClass.datetime, 'h:mm a')}">6:00 PM</span>
+                            </div>
+                            <div class="detail-item">
+                                <span>Salón:</span>
+                                <span th:text="${confirmedClass.room}">Sala 1</span>
+                            </div>
+                        </div>
+
+                        <div class="class-action">
+                            <div th:if="${confirmedClass.status.name() == 'ACTIVE'}">
+                                <form
+                                    th:action="@{/cancelarInscripcion/{id}(id=${confirmedClass.idFunctionalTraining})}"
+                                    method="post">
+                                    <button class="btn-class btn-cancel">
+                                        Cancelar inscripción
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div th:if="${confirmedClass.status.name() != 'ACTIVE'}">
+                                <button class="btn-class btn-completed" disabled>
+                                    Completada
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div th:replace="fragments/bottom-navbar :: bottom-navbar"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/active-gym-count.js}"></script>
+    <script th:src="@{/js/home-filters.js}"></script>
+</body>
+
+</html>
