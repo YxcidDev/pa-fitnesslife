@@ -63,7 +63,7 @@ class PasswordResetServiceTest {
         String result = passwordResetService.verifyOtpAndChangePassword(
                 "user@test.com", "123456", "newPass123");
 
-        assertEquals("FAIL_TEST", result);
+        assertEquals("OK", result);
         verify(user).setPassword("hashedPassword");
         verify(userRepository).save(user);
         verify(redisTemplate).delete("otp:user@test.com");
