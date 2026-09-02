@@ -20,3 +20,6 @@ jobs:
 
       - name: Build con Maven
         run: mvn -B clean compile
+
+      - name: Ejecutar pruebas unitarias
+        run: mvn test
