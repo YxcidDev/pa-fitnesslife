@@ -1,0 +1,225 @@
+Fitness Life dispone de términos y condiciones de uso, una política de tratamiento de datos personales y una política de cookies. Estos documentos describen las condiciones de utilización de la plataforma, el tratamiento de la información personal de los usuarios y el funcionamiento de las cookies.
+
+Los documentos legales proporcionados tienen como última fecha de actualización el 6 de octubre de 2026.
+
+Términos y condiciones de uso
+
+Aceptación de los términos
+
+Al registrarse y utilizar la plataforma Fitness Life, el usuario acepta los términos y condiciones de uso. Si no está de acuerdo con estas condiciones, no debe utilizar el servicio.
+
+Descripción del servicio
+
+Fitness Life es una plataforma de gestión para gimnasios que permite administrar membresías, pagos, clases grupales y control de acceso mediante código QR.
+
+Registro de cuentas
+
+El registro está disponible desde los 15 años. Los usuarios deben proporcionar información veraz y mantener actualizados sus datos de contacto.
+
+Cada usuario es responsable de la confidencialidad de su contraseña y de las actividades realizadas desde su cuenta.
+
+Planes y pagos
+
+Los precios de las membresías se expresan en pesos colombianos (COP). Los pagos se procesan mediante la pasarela de pagos ePayco.
+
+El plan adquirido se activa una vez confirmado el pago y tiene la duración indicada al momento de la compra.
+
+Derecho de retracto y reembolsos
+
+Según los términos y condiciones publicados por Fitness Life, los retractos y reembolsos aplican dentro de los primeros cinco días hábiles o calendario posteriores a una compra digital o telefónica, siempre que el servicio no se haya consumido.
+
+Se considera consumido el servicio cuando el usuario ha hecho uso del acceso al gimnasio o de las clases incluidas en el plan adquirido.
+
+Después de este plazo, o si el servicio ya ha sido utilizado, no aplican reembolsos conforme a las condiciones descritas en los términos y condiciones publicados.
+
+Cancelación de membresía
+
+El usuario puede dejar de renovar su plan en cualquier momento. La cancelación de la renovación no elimina inmediatamente el acceso: el usuario conserva el acceso hasta la fecha de vencimiento del período que ya pagó.
+
+La cancelación no genera automáticamente un reembolso, salvo los casos contemplados en las condiciones de retracto y reembolso.
+
+Acceso mediante código QR
+
+El código QR de acceso es personal e intransferible y no debe compartirse con terceros.
+
+Si el usuario sospecha que su código QR ha sido comprometido, puede regenerarlo desde su perfil. Al generarse un nuevo código, la versión anterior queda invalidada automáticamente.
+
+Clases grupales
+
+Las clases grupales tienen cupos limitados y se asignan por orden de inscripción.
+
+Fitness Life puede cancelar o reprogramar una clase por disponibilidad del instructor o de las instalaciones. En tales casos, notificará a los usuarios con la anticipación razonable que permitan las circunstancias.
+
+Uso de las instalaciones y asunción de riesgos
+
+El ejercicio físico implica riesgos inherentes. Al utilizar las instalaciones, el usuario declara encontrarse en condiciones físicas adecuadas para realizar actividad física o haber consultado con un profesional de la salud cuando tenga dudas.
+
+Fitness Life declara que no se hace responsable por lesiones derivadas del uso inadecuado de equipos o del incumplimiento de las indicaciones del personal.
+
+Conducta del usuario
+
+Los usuarios se comprometen a utilizar la plataforma para los fines previstos, no intentar vulnerar la seguridad del sistema y tratar con respeto al personal y a los demás usuarios del gimnasio.
+
+Propiedad intelectual
+
+El contenido de la plataforma, incluida la marca, el diseño, los textos y los logotipos, es propiedad de Fitness Life y no puede reproducirse sin autorización.
+
+Limitación de responsabilidad
+
+Fitness Life no garantiza que la plataforma esté libre de interrupciones o errores. Los términos establecen que no será responsable por daños indirectos derivados del uso del servicio, dentro de los límites permitidos por la ley.
+
+Modificaciones de los términos
+
+Fitness Life puede modificar los términos y condiciones en cualquier momento. Los cambios relevantes se publicarán en la página correspondiente con su fecha de actualización.
+
+Ley aplicable y jurisdicción
+
+Los términos y condiciones se rigen por las leyes de la República de Colombia. Según el texto publicado, las controversias se resolverán ante los jueces competentes de Cartagena de Indias.
+
+Política de tratamiento de datos personales
+
+Responsable del tratamiento
+
+Fitness Life, identificado con NIT 900.123.456-1, es responsable del tratamiento de los datos personales suministrados por los usuarios al utilizar la plataforma.
+
+Dirección: Transversal 54 # 31-40, Cartagena, Colombia.
+
+Correo electrónico: info@fitnesslife.com.
+
+Teléfono: +57 323 4580755.
+
+Datos personales recopilados
+
+Fitness Life recopila diferentes categorías de información para gestionar las cuentas de usuario y prestar sus servicios.
+
+Datos de identificación: nombre, apellido, número de identificación, fecha de nacimiento y sexo.
+
+Datos de contacto: correo electrónico y número de teléfono.
+
+Datos de acceso: contraseña, fotografía de perfil y código QR de acceso. La política indica que las contraseñas se almacenan cifradas y no en texto plano.
+
+Datos sensibles: tipo de sangre, cuando el usuario decide suministrarlo voluntariamente.
+
+Datos de uso del servicio: registros de entrada y salida del gimnasio, inscripciones a clases, historial de pagos e historial de planes.
+
+Datos derivados: a partir del historial de asistencia y pagos, el sistema calcula indicadores internos de uso. Estos pueden emplearse, por ejemplo, para anticipar si un usuario dejará de asistir. La política indica que esa información se utiliza con fines exclusivamente operativos del gimnasio y no se comparte ni se utiliza para fines distintos.
+
+Finalidades del tratamiento de datos
+
+Fitness Life utiliza los datos personales para crear y administrar cuentas, gestionar membresías, procesar pagos, controlar el acceso mediante código QR y comunicarse con los usuarios.
+
+Las comunicaciones pueden incluir confirmaciones, recuperación de contraseñas y avisos relacionados con el servicio.
+
+La información también se utiliza para cumplir obligaciones legales y contractuales y mejorar la operación interna del gimnasio.
+
+La política indica que Fitness Life no utiliza los datos personales con fines publicitarios, no vende los datos y no los comparte con terceros distintos de los estrictamente necesarios para prestar el servicio. Un ejemplo de proveedor necesario es ePayco, que procesa las compras.
+
+Tratamiento del tipo de sangre
+
+El tipo de sangre se considera un dato sensible relacionado con la salud.
+
+Fitness Life indica que solo recopila este dato cuando el usuario lo proporciona voluntariamente, con el propósito de disponer de la información en caso de una emergencia médica dentro de las instalaciones.
+
+La política establece que se solicita autorización expresa antes de registrar o modificar este dato y que el usuario puede eliminarlo desde su perfil en cualquier momento.
+
+Transferencia y almacenamiento internacional de datos
+
+La política de Fitness Life indica que su infraestructura de almacenamiento de datos se encuentra en servidores de Amazon Web Services ubicados en Estados Unidos, en la región us-east-1, Norte de Virginia.
+
+Esto implica una transferencia internacional de datos personales fuera de Colombia. La política señala que dicha transferencia se realiza con medidas de seguridad contractuales y técnicas razonables y hace referencia al artículo 26 de la Ley 1581 de 2012.
+
+Seguridad de la información
+
+Fitness Life declara aplicar medidas técnicas razonables para proteger la información de los usuarios. Entre las medidas descritas se encuentran el cifrado de contraseñas, el control de acceso basado en roles, la conexión segura mediante HTTPS y la revisión periódica de los sistemas.
+
+La política reconoce que ningún sistema es completamente infalible y señala que la organización trabaja para mantener la seguridad de la información.
+
+Derechos de los titulares de los datos personales
+
+De acuerdo con la política publicada, los usuarios tienen los siguientes derechos relacionados con sus datos personales:
+
+Conocer, actualizar y rectificar sus datos personales.
+
+Solicitar prueba de la autorización otorgada para el tratamiento de sus datos.
+
+Ser informados sobre el uso que se ha dado a sus datos personales.
+
+Presentar quejas ante la Superintendencia de Industria y Comercio.
+
+Revocar la autorización y solicitar la supresión de sus datos cuando no exista un deber legal o contractual que lo impida.
+
+Acceder gratuitamente a sus datos personales.
+
+Cómo ejercer los derechos de protección de datos
+
+Los usuarios pueden ejercer sus derechos enviando una solicitud al correo electrónico info@fitnesslife.com.
+
+La solicitud debe indicar el nombre completo, el número de identificación y la petición concreta. Fitness Life señala que responderá dentro de los términos establecidos por la ley.
+
+Tratamiento de datos de menores de edad
+
+La plataforma permite el registro a partir de los 15 años.
+
+La política indica que los usuarios menores de 18 años declaran contar con la autorización de sus padres o de su representante legal para el tratamiento de sus datos personales.
+
+Vigencia y modificaciones de la política de datos
+
+La política rige desde su publicación y permanece vigente mientras Fitness Life trate datos personales.
+
+La organización puede actualizarla y publicará los cambios relevantes en la página correspondiente.
+
+Política de cookies
+
+Qué son las cookies
+
+Las cookies son pequeños archivos que un sitio web almacena en el navegador del usuario para recordar información entre visitas o durante una sesión.
+
+Cookies utilizadas por Fitness Life
+
+Según la política publicada, Fitness Life utiliza cookies estrictamente necesarias para el funcionamiento de la plataforma. La política indica que no se utilizan cookies de publicidad ni de analítica.
+
+Cookie de sesión: permite mantener la sesión iniciada mientras el usuario utiliza la plataforma.
+
+XSRF-TOKEN: ayuda a proteger los formularios y las solicitudes contra ataques de falsificación.
+
+Cookies de ePayco: la pasarela de pagos puede establecer sus propias cookies al abrir el proceso de pago, con fines de prevención del fraude.
+
+Cookies que no se utilizan
+
+La política indica que Fitness Life no utiliza Google Analytics, píxeles de redes sociales ni cookies de rastreo publicitario.
+
+Administración de cookies
+
+Los usuarios pueden eliminar o bloquear cookies desde la configuración de su navegador.
+
+Sin embargo, bloquear las cookies necesarias puede impedir que la plataforma funcione correctamente. Por ejemplo, podría no ser posible mantener una sesión iniciada.
+
+Cambios en la política de cookies
+
+Fitness Life puede actualizar la política si cambian las cookies utilizadas. Las modificaciones se publicarán en la página correspondiente.
+
+Información de contacto para consultas legales y de privacidad
+
+Para consultas relacionadas con los términos y condiciones, el tratamiento de datos personales, los derechos de los titulares o las políticas de cookies, los usuarios pueden comunicarse con Fitness Life.
+
+Nombre: Fitness Life.
+
+NIT: 900.123.456-1.
+
+Dirección: Transversal 54 # 31-40, Cartagena, Colombia.
+
+Correo electrónico: info@fitnesslife.com.
+
+Teléfono: +57 323 4580755.
+
+Fecha de actualización de los documentos legales: 6 de octubre de 2026.
+
+Instrucciones para responder consultas legales
+
+El asistente debe explicar las políticas de acuerdo con el contenido disponible, sin inventar excepciones, plazos, derechos, requisitos o procedimientos adicionales.
+
+Cuando un usuario pregunte por un reembolso, debe considerar tanto el plazo descrito en los términos como la condición de que el servicio no se haya consumido.
+
+Cuando una consulta dependa de las circunstancias particulares de una compra, del estado de una cuenta o de una solicitud de protección de datos, el asistente debe explicar la regla general y orientar al usuario hacia el correo info@fitnesslife.com para consultar su caso.
+
+El contenido de este documento resume las políticas proporcionadas por Fitness Life. Para resolver controversias o determinar cómo se aplica una disposición legal a un caso particular, debe consultarse el texto legal correspondiente y, cuando sea necesario, asesoría jurídica profesional.
