@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<body>
+
+<div th:fragment="chatbot-widget" sec:authorize="isAuthenticated()" id="flChat" class="fl-chat"
+     th:data-endpoint="@{/api/chatbot}">
+
+    <link rel="stylesheet" th:href="@{/css/chatbot-widget.css}" />
+
+    <section id="flChatPanel" class="fl-chat__panel" role="dialog" aria-label="Asistente virtual de Fitness Life"
+             hidden>
+        <header class="fl-chat__header">
+            <div class="fl-chat__avatar" aria-hidden="true">
+                <i class="bi bi-stars"></i>
+            </div>
+            <div class="fl-chat__heading">
+                <h2 class="fl-chat__title">Asistente Fitness Life</h2>
+                <p class="fl-chat__status"><span class="fl-chat__dot" aria-hidden="true"></span>En línea</p>
+            </div>
+            <div class="fl-chat__actions">
+                <button type="button" id="flChatClear" class="fl-chat__icon-btn" title="Borrar conversación"
+                        aria-label="Borrar conversación">
+                    <i class="bi bi-trash3"></i>
+                </button>
+                <button type="button" id="flChatClose" class="fl-chat__icon-btn" title="Cerrar"
+                        aria-label="Cerrar chat">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+        </header>
+
+        <div id="flChatMessages" class="fl-chat__messages" role="log" aria-live="polite"
+             aria-relevant="additions"></div>
+
+        <div id="flChatSuggestions" class="fl-chat__suggestions">
+            <button type="button" class="fl-chat__chip" data-text="¿Qué planes de membresía tienen?">Ver
+                planes</button>
+            <button type="button" class="fl-chat__chip" data-text="¿Cómo me inscribo a una clase?">Inscribirme a
+                una clase</button>
+            <button type="button" class="fl-chat__chip" data-text="¿Cuáles son los horarios del gimnasio?">Horarios
+                del gimnasio</button>
+            <button type="button" class="fl-chat__chip" data-text="¿Cómo funciona el código QR de asistencia?">Código
+                QR</button>
+        </div>
+
+        <form id="flChatForm" class="fl-chat__form" autocomplete="off">
+            <label for="flChatInput" class="visually-hidden">Escribe tu mensaje</label>
+            <textarea id="flChatInput" class="fl-chat__input" rows="1" maxlength="500"
+                      placeholder="Escribe tu mensaje..."></textarea>
+            <button type="submit" id="flChatSend" class="fl-chat__send" aria-label="Enviar mensaje">
+                <i class="bi bi-arrow-up"></i>
+            </button>
+        </form>
+        <p class="fl-chat__disclaimer">Respuestas generadas con IA, pueden contener errores.</p>
+    </section>
+
+    <button type="button" id="flChatToggle" class="fl-chat__toggle" aria-expanded="false"
+            aria-controls="flChatPanel" aria-label="Abrir asistente virtual">
+        <i class="bi bi-chat-dots-fill fl-chat__toggle-open" aria-hidden="true"></i>
+        <i class="bi bi-chevron-down fl-chat__toggle-close" aria-hidden="true"></i>
+        <span id="flChatBadge" class="fl-chat__badge" aria-hidden="true">1</span>
+    </button>
+
+    <script th:src="@{/js/chatbot-widget.js}" defer></script>
+</div>
+</body>
+
+</html>

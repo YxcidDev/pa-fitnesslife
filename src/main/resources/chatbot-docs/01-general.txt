@@ -1,0 +1,83 @@
+Fitness Life es un gimnasio y centro de entrenamiento ubicado en Cartagena, Colombia. Su plataforma permite a los usuarios consultar servicios, conocer los planes de membresía, gestionar su cuenta, acceder a información sobre clases grupales y administrar el acceso al gimnasio mediante un código QR.
+
+El lema de Fitness Life es "¡Vive más fuerte, vive mejor!". La plataforma promueve el entrenamiento físico, la mejora de la condición física y el acompañamiento profesional para alcanzar objetivos personales de entrenamiento.
+
+Servicios de Fitness Life
+
+Fitness Life ofrece diferentes servicios relacionados con el acondicionamiento físico, el entrenamiento de fuerza y el bienestar.
+
+Entrenamiento de fuerza
+
+El gimnasio ofrece programas de entrenamiento de fuerza orientados a mejorar la potencia y la fuerza física. Estos programas están diseñados para apoyar el progreso de los usuarios mediante ejercicios y actividades de entrenamiento.
+
+Rutinas personalizadas
+
+Fitness Life ofrece rutinas de entrenamiento personalizadas de acuerdo con los objetivos y la condición física de cada persona. El propósito es proporcionar una planificación de ejercicios adaptada a las metas individuales de cada usuario.
+
+Sesiones grupales activas
+
+Fitness Life dispone de clases y sesiones grupales que permiten a los usuarios entrenar en un ambiente dinámico y motivador. La oferta incluye clases destacadas como spinning, boxeo y zumba.
+
+Asesoría profesional
+
+Fitness Life ofrece asesoría profesional y acompañamiento para ayudar a los usuarios a alcanzar sus objetivos de entrenamiento. La plataforma presenta este servicio como parte de su propuesta de atención a los miembros.
+
+Funcionamiento de la plataforma
+
+Fitness Life es una plataforma de gestión para gimnasios. Permite administrar membresías, pagos, clases grupales y el control de acceso mediante códigos QR.
+
+Los usuarios pueden consultar los planes disponibles en la página principal, revisar sus precios y beneficios y continuar con el proceso de adquisición de una membresía.
+
+Los usuarios registrados pueden iniciar sesión y acceder al panel de usuario. La plataforma también permite cerrar la sesión cuando el usuario termina de utilizar su cuenta.
+
+Registro de usuarios
+
+El registro en Fitness Life está disponible desde los 15 años. Los usuarios deben proporcionar información veraz y mantener actualizados sus datos de contacto. La información relativa al tratamiento de datos personales de los menores de edad está descrita en la política de tratamiento de datos personales.
+
+Cuenta de usuario
+
+La cuenta permite identificar al miembro dentro de la plataforma y gestionar información relacionada con su membresía y el uso de los servicios del gimnasio.
+
+Cada usuario es responsable de mantener la confidencialidad de su contraseña y de las actividades realizadas desde su cuenta.
+
+Acceso mediante código QR
+
+Fitness Life utiliza códigos QR para controlar el acceso al gimnasio. El código QR de cada usuario es personal e intransferible y no debe compartirse con otras personas.
+
+Si un usuario sospecha que su código QR ha sido comprometido, puede regenerarlo desde su perfil. Al generar un nuevo código, la versión anterior queda invalidada automáticamente.
+
+Membresías y pagos
+
+Fitness Life ofrece planes de membresía con diferentes precios, duraciones y beneficios. Los precios se expresan en pesos colombianos (COP).
+
+El pago de las membresías se procesa mediante la pasarela de pagos ePayco. La membresía adquirida se activa después de que el pago haya sido confirmado.
+
+Los planes Básico, Premium y Elite tienen una duración registrada de 30 días. Sus precios y beneficios específicos se describen en el documento de planes y membresías.
+
+Ubicación y contacto
+
+Fitness Life se encuentra en Cartagena, Colombia.
+
+Dirección: Transversal 54 # 31-40, Cartagena, Colombia.
+
+Correo electrónico: info@fitnesslife.com.
+
+Teléfono principal: +57 323 4580755.
+
+Teléfono adicional publicado en la página principal: +57 317 3029226.
+
+Para consultas sobre los servicios, las membresías, los pagos o el funcionamiento de la plataforma, los usuarios pueden comunicarse con Fitness Life mediante sus canales de contacto.
+
+Información presentada en la página principal
+
+La página principal de Fitness Life incluye una sección de servicios, una sección de clases destacadas, una sección para consultar las membresías y una sección de comentarios de clientes.
+
+La página presenta una calificación de 4.9, una cifra de 10K clientes satisfechos y una cifra de 20K sesiones completadas. Estos valores corresponden a los indicadores que aparecen publicados en la página.
+
+En la sección de comentarios se muestran testimonios atribuidos a Ronnie Coleman, Dorian Yates y Arnold Schwarzenegger, identificados respectivamente como miembros Premium, Elite y Básico. La información suministrada no permite verificar de forma independiente la autenticidad de dichos testimonios.
+
+Contacto para consultas adicionales
+
+Cuando un usuario tenga una duda específica que no pueda resolverse con la información disponible en el asistente, puede comunicarse directamente con Fitness Life mediante el correo info@fitnesslife.com o el teléfono +57 323 4580755.
+
+El asistente debe proporcionar únicamente información respaldada por los datos disponibles. Si una consulta requiere conocer el estado particular de una cuenta, un pago o una membresía, debe indicar que es necesario consultar la información correspondiente en la plataforma o con el personal de Fitness Life.

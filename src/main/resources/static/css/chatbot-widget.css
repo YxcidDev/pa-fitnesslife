@@ -1,0 +1,520 @@
+.fl-chat {
+    --fl-primary: var(--primary-color, #eb6608);
+    --fl-primary-hover: var(--hover-primary, #c75006);
+    --fl-bg: var(--bg-body, #1d1b1a);
+    --fl-card: var(--card-bg, #323333);
+    --fl-text: var(--text-white, #ffffff);
+    --fl-muted: var(--text-gray, #d3d3d3);
+    --fl-border: rgba(255, 255, 255, 0.1);
+    --fl-danger: #e5484d;
+    --fl-online: #3ccf91;
+    --fl-bottom: 90px;
+    --fl-right: 20px;
+
+    font-family: "Work Sans", sans-serif;
+    color: var(--fl-text);
+}
+
+.fl-chat *,
+.fl-chat *::before,
+.fl-chat *::after {
+    box-sizing: border-box;
+}
+
+.fl-chat__toggle {
+    position: fixed;
+    right: var(--fl-right);
+    bottom: var(--fl-bottom);
+    z-index: 1040;
+    width: 58px;
+    height: 58px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--fl-primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(235, 102, 8, 0.4);
+    transition:
+            transform 0.2s ease,
+            background 0.2s ease;
+}
+
+.fl-chat__toggle:hover {
+    background: var(--fl-primary-hover);
+    transform: scale(1.06);
+}
+
+.fl-chat__toggle:focus-visible,
+.fl-chat__icon-btn:focus-visible,
+.fl-chat__chip:focus-visible,
+.fl-chat__send:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.fl-chat__toggle > i {
+    grid-area: 1 / 1;
+    transition:
+            opacity 0.2s ease,
+            transform 0.2s ease;
+}
+
+.fl-chat__toggle-close {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+}
+
+.fl-chat.is-open .fl-chat__toggle-open {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.6);
+}
+
+.fl-chat.is-open .fl-chat__toggle-close {
+    opacity: 1;
+    transform: none;
+}
+
+.fl-chat__badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 10px;
+    background: var(--fl-danger);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    border: 2px solid var(--fl-bg);
+}
+
+.fl-chat__badge[hidden] {
+    display: none;
+}
+
+.fl-chat__panel {
+    position: fixed;
+    right: var(--fl-right);
+    bottom: calc(var(--fl-bottom) + 70px);
+    z-index: 1040;
+    width: 380px;
+    max-width: calc(100vw - (var(--fl-right) * 2));
+    height: min(560px, calc(100dvh - var(--fl-bottom) - 100px));
+    display: flex;
+    flex-direction: column;
+    background: var(--fl-bg);
+    border: 1px solid var(--fl-border);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    transform-origin: bottom right;
+    transition:
+            opacity 0.18s ease,
+            transform 0.18s ease;
+}
+
+.fl-chat__panel[hidden] {
+    display: none;
+}
+
+.fl-chat.is-open .fl-chat__panel {
+    opacity: 1;
+    transform: none;
+}
+
+.fl-chat__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: var(--fl-card);
+    border-bottom: 1px solid var(--fl-border);
+}
+
+.fl-chat__avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--fl-primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+}
+
+.fl-chat__heading {
+    flex: 1;
+    min-width: 0;
+}
+
+.fl-chat__title {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--fl-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fl-chat__status {
+    margin: 2px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--fl-muted);
+}
+
+.fl-chat__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--fl-online);
+}
+
+.fl-chat__actions {
+    display: flex;
+    gap: 2px;
+}
+
+.fl-chat__icon-btn {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--fl-muted);
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition:
+            background 0.2s,
+            color 0.2s;
+}
+
+.fl-chat__icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.fl-chat__messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+}
+
+.fl-chat__messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.fl-chat__messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 3px;
+}
+
+.fl-day {
+    align-self: center;
+    padding: 3px 12px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    color: var(--fl-muted);
+    font-size: 11.5px;
+    text-transform: capitalize;
+}
+
+.fl-msg {
+    display: flex;
+    flex-direction: column;
+    max-width: 86%;
+    animation: fl-pop 0.18s ease;
+}
+
+.fl-msg--bot {
+    align-self: flex-start;
+    align-items: flex-start;
+}
+
+.fl-msg--user {
+    align-self: flex-end;
+    align-items: flex-end;
+}
+
+.fl-msg__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-size: 11.5px;
+    color: var(--fl-muted);
+}
+
+.fl-msg__author {
+    font-weight: 600;
+    color: var(--fl-text);
+    opacity: 0.9;
+}
+
+.fl-msg__time {
+    opacity: 0.7;
+    white-space: nowrap;
+}
+
+.fl-msg__bubble {
+    padding: 0.65rem 0.9rem;
+    font-size: 14px;
+    line-height: 1.5;
+    border-radius: 14px;
+    overflow-wrap: anywhere;
+}
+
+.fl-msg--bot .fl-msg__bubble {
+    background: var(--fl-card);
+    border-top-left-radius: 4px;
+}
+
+.fl-msg--user .fl-msg__bubble {
+    background: var(--fl-primary);
+    color: #fff;
+    border-top-right-radius: 4px;
+    white-space: pre-wrap;
+}
+
+.fl-msg--error .fl-msg__bubble {
+    background: rgba(139, 0, 0, 0.3);
+    border: 1px solid rgba(229, 72, 77, 0.5);
+}
+
+.fl-msg__bubble p {
+    margin: 0 0 0.5rem;
+}
+
+.fl-msg__bubble p:last-child,
+.fl-msg__bubble ul:last-child,
+.fl-msg__bubble ol:last-child {
+    margin-bottom: 0;
+}
+
+.fl-msg__bubble ul,
+.fl-msg__bubble ol {
+    margin: 0 0 0.5rem;
+    padding-left: 1.2rem;
+}
+
+.fl-msg__bubble li {
+    margin-bottom: 0.2rem;
+}
+
+.fl-typing {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0;
+}
+
+.fl-typing span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fl-muted);
+    opacity: 0.5;
+    animation: fl-bounce 1.2s infinite ease-in-out;
+}
+
+.fl-typing span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.fl-typing span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes fl-bounce {
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+    30% {
+        transform: translateY(-5px);
+        opacity: 1;
+    }
+}
+
+@keyframes fl-pop {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.fl-chat__suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0 1rem 0.75rem;
+}
+
+.fl-chat__suggestions[hidden] {
+    display: none;
+}
+
+.fl-chat__chip {
+    border: 0;
+    border-radius: 999px;
+    padding: 0.42rem 0.95rem;
+    background: var(--fl-primary);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+            background 0.2s,
+            transform 0.2s;
+}
+
+.fl-chat__chip:hover {
+    background: var(--fl-primary-hover);
+    transform: translateY(-1px);
+}
+
+.fl-chat__form {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.75rem 0.75rem 0.4rem;
+    border-top: 1px solid var(--fl-border);
+}
+
+.fl-chat__input {
+    flex: 1;
+    min-height: 42px;
+    max-height: 120px;
+    resize: none;
+    padding: 0.6rem 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--fl-border);
+    border-radius: 12px;
+    color: var(--fl-text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.4;
+    transition:
+            border-color 0.2s,
+            background 0.2s;
+}
+
+.fl-chat__input::placeholder {
+    color: var(--fl-muted);
+    opacity: 0.55;
+}
+
+.fl-chat__input:focus {
+    outline: none;
+    border-color: var(--fl-primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px rgba(235, 102, 8, 0.15);
+}
+
+.fl-chat__send {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--fl-primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition:
+            background 0.2s,
+            opacity 0.2s;
+}
+
+.fl-chat__send:hover:not(:disabled) {
+    background: var(--fl-primary-hover);
+}
+
+.fl-chat__send:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.fl-chat__disclaimer {
+    margin: 0;
+    padding: 0 1rem 0.6rem;
+    text-align: center;
+    font-size: 11px;
+    color: var(--fl-muted);
+    opacity: 0.55;
+}
+
+@media screen and (max-width: 576px) {
+    .fl-chat {
+        --fl-right: 16px;
+    }
+
+    .fl-chat__panel {
+        inset: 0;
+        z-index: 1060;
+        width: 100%;
+        max-width: none;
+        height: 100dvh;
+        border: 0;
+        border-radius: 0;
+        transform: translateY(24px);
+    }
+
+    .fl-chat.is-open .fl-chat__toggle {
+        display: none;
+    }
+
+    html.fl-chat-lock,
+    html.fl-chat-lock body {
+        overflow: hidden;
+    }
+
+    .fl-msg {
+        max-width: 90%;
+    }
+
+    .fl-chat__input {
+        font-size: 16px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fl-chat *,
+    .fl-chat *::before,
+    .fl-chat *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

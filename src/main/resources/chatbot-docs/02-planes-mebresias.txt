@@ -1,0 +1,78 @@
+Fitness Life ofrece tres planes de membresía: Básico, Premium y Elite. Todos los planes tienen una duración de 30 días y sus precios están expresados en pesos colombianos (COP). Cada plan ofrece diferentes beneficios según las necesidades de entrenamiento de cada miembro.
+
+Planes y membresías
+
+Plan Básico
+
+El plan Básico cuesta $50.000 COP y tiene una duración de 30 días. Está identificado con la etiqueta "Popular". Es una opción para quienes desean acceder al gimnasio y utilizar los equipos básicos de entrenamiento.
+
+Beneficios del plan Básico:
+- Acceso al gimnasio.
+- Uso de equipos básicos.
+- Una clase grupal semanal.
+- Casilleros disponibles.
+
+El precio del plan Básico es de $50.000 COP por una duración de 30 días.
+
+Plan Premium
+
+El plan Premium cuesta $80.000 COP y tiene una duración de 30 días. Está identificado con la etiqueta "Recomendado". Incluye acceso ilimitado al gimnasio las 24 horas del día, los 7 días de la semana, además de beneficios relacionados con las clases grupales, el entrenamiento personal y la nutrición.
+
+Beneficios del plan Premium:
+- Acceso ilimitado al gimnasio 24/7.
+- Acceso a todas las clases grupales.
+- Una sesión de entrenamiento personal.
+- Plan nutricional básico.
+- Descuentos en productos.
+
+El precio del plan Premium es de $80.000 COP por una duración de 30 días.
+
+Plan Elite
+
+El plan Elite cuesta $120.000 COP y tiene una duración de 30 días. Está identificado con la etiqueta "VIP". Incluye todos los beneficios del plan Premium, además de servicios adicionales de entrenamiento personalizado, nutrición, bienestar y evaluación física.
+
+Beneficios del plan Elite:
+- Todos los beneficios incluidos en el plan Premium.
+- Cuatro sesiones personalizadas al mes.
+- Plan nutricional completo.
+- Acceso a sauna y spa.
+- Evaluaciones mensuales.
+- Bebidas proteicas gratis.
+
+El plan Elite también incluye acceso ilimitado al gimnasio 24/7, todas las clases grupales, una sesión de entrenamiento personal, un plan nutricional básico y descuentos en productos, como parte de los beneficios del plan Premium.
+
+El precio del plan Elite es de $120.000 COP por una duración de 30 días.
+
+Métodos de pago
+
+Fitness Life procesa los pagos de sus membresías a través de la pasarela de pagos ePayco. Los precios de los planes se muestran en pesos colombianos (COP).
+
+La membresía adquirida se activa una vez que el pago ha sido confirmado. La duración de la membresía corresponde al período indicado al momento de la compra.
+
+Si un usuario pregunta cómo pagar una membresía de Fitness Life, se le debe informar que los pagos se procesan mediante ePayco. No se deben inventar otros métodos de pago que no estén confirmados en la información disponible.
+
+Comparación de los planes
+
+El plan Básico cuesta $50.000 COP, dura 30 días e incluye acceso al gimnasio, uso de equipos básicos, una clase grupal semanal y casilleros disponibles.
+
+El plan Premium cuesta $80.000 COP, dura 30 días e incluye acceso ilimitado al gimnasio 24/7, todas las clases grupales, una sesión de entrenamiento personal, un plan nutricional básico y descuentos en productos.
+
+El plan Elite cuesta $120.000 COP, dura 30 días e incluye todos los beneficios del plan Premium, cuatro sesiones personalizadas al mes, un plan nutricional completo, acceso a sauna y spa, evaluaciones mensuales y bebidas proteicas gratis.
+
+Selección de un plan
+
+Los usuarios pueden consultar los planes disponibles en la página principal de Fitness Life, en la sección "Selecciona un plan". Cada tarjeta muestra el nombre del plan, su precio y sus beneficios. Desde la opción "Empezar Ahora", el usuario puede continuar hacia la sección de contacto correspondiente al plan seleccionado.
+
+Activación de la membresía
+
+La activación del plan se realiza una vez que ePayco confirma el pago. La membresía tiene la duración indicada en el momento de la compra. Para conocer el estado de una compra particular, se debe consultar la información correspondiente a la transacción y a la cuenta del usuario.
+
+Cancelación y reembolsos
+
+El usuario puede dejar de renovar su plan en cualquier momento. El acceso al gimnasio permanecerá activo hasta la fecha de vencimiento del período pagado.
+
+La cancelación de la renovación no genera automáticamente un reembolso. Los retractos y reembolsos están sujetos a las condiciones indicadas en los términos y condiciones de Fitness Life: aplican dentro de los primeros cinco días hábiles o calendario posteriores a una compra digital o telefónica, siempre que no se haya consumido el servicio. Si el plazo ha vencido o el servicio ya se ha utilizado, no aplican reembolsos según las condiciones descritas en dichos términos.
+
+Disponibilidad de las membresías
+
+Los planes Básico, Premium y Elite corresponden a la información registrada en la plataforma. La existencia de otros planes, las modificaciones de precios y los cambios en los beneficios deben verificarse con la información actualizada del sistema.
